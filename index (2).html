@@ -2,574 +2,1130 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Customer Advocacy in EdTech — Survey</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EdTech Platform Experience Survey</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
   <style>
+    :root {
+      --purple-900: #2D0A5E;
+      --purple-800: #3D1080;
+      --purple-700: #5217A8;
+      --purple-600: #6B2FD4;
+      --purple-500: #7C3AED;
+      --purple-400: #9B5FF5;
+      --purple-300: #C4A8FA;
+      --purple-100: #EDE9FE;
+      --purple-50:  #F5F3FF;
+      --white:      #FFFFFF;
+      --gray-50:    #F9FAFB;
+      --gray-100:   #F3F4F6;
+      --gray-200:   #E5E7EB;
+      --gray-400:   #9CA3AF;
+      --gray-500:   #6B7280;
+      --gray-700:   #374151;
+      --gray-900:   #111827;
+      --error:      #DC2626;
+      --success:    #059669;
+      --radius:     12px;
+      --shadow-sm:  0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+      --shadow-md:  0 4px 16px rgba(109,47,212,0.10), 0 2px 6px rgba(0,0,0,0.06);
+      --shadow-lg:  0 10px 40px rgba(109,47,212,0.14), 0 4px 12px rgba(0,0,0,0.08);
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --gf-purple:       #673AB7;
-      --gf-purple-light: #EDE7F6;
-      --gf-surface:      #FFFFFF;
-      --gf-bg:           #F0EBF8;
-      --gf-border:       #DADCE0;
-      --gf-text:         #202124;
-      --gf-muted:        #5F6368;
-      --gf-error:        #D93025;
-      --gf-success:      #188038;
-      --gf-header-bar:   #7B1FA2;
-      --radius:          8px;
-      --shadow:          0 2px 6px rgba(0,0,0,.12);
-    }
-
-    html { scroll-behavior: smooth; }
-
     body {
-      font-family: 'Roboto', sans-serif;
-      background: var(--gf-bg);
-      color: var(--gf-text);
+      font-family: 'DM Sans', sans-serif;
+      background: linear-gradient(160deg, #F0EAFF 0%, #F9F7FF 40%, #FAFAFF 100%);
       min-height: 100vh;
-      padding: 24px 16px 60px;
+      color: var(--gray-900);
+      padding: 0 0 60px;
     }
 
-    .form-wrapper { max-width: 680px; margin: 0 auto; }
-
-    .header-card {
-      background: var(--gf-surface);
-      border-radius: var(--radius);
+    /* ── HEADER BANNER ── */
+    .survey-header {
+      background: linear-gradient(135deg, var(--purple-800) 0%, var(--purple-600) 60%, var(--purple-400) 100%);
+      padding: 0;
+      position: relative;
       overflow: hidden;
-      box-shadow: var(--shadow);
-      margin-bottom: 12px;
-      border-top: 10px solid var(--gf-header-bar);
     }
-    .header-card-body { padding: 24px 24px 20px; }
-    .header-card h1 {
-      font-family: 'Google Sans', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 700;
+    .survey-header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .header-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 36px 24px 0;
+    }
+    .header-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.28);
+      color: #fff;
+      font-size: 11px; font-weight: 600; letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 5px 12px; border-radius: 100px;
+      margin-bottom: 18px;
+    }
+    .header-tag::before { content: '●'; font-size: 8px; color: #B3F5D0; }
+    .survey-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(24px, 5vw, 36px);
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+    .survey-desc {
+      font-size: 14px; color: rgba(255,255,255,0.82);
+      line-height: 1.65; max-width: 560px;
+      margin-bottom: 28px;
+    }
+    .header-progress-bar {
+      height: 4px;
+      background: rgba(255,255,255,0.20);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+    .header-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #C4A8FA, #fff);
+      border-radius: 2px;
+      transition: width 0.5s cubic-bezier(.4,0,.2,1);
+      width: 0%;
+    }
+    .progress-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0 14px;
+    }
+    .progress-label { font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 500; }
+    .progress-pct { font-size: 12px; color: rgba(255,255,255,0.9); font-weight: 600; }
+
+    /* ── CARD WRAPPER ── */
+    .survey-body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      display: none;
+      animation: fadeSlideUp 0.4s cubic-bezier(.4,0,.2,1) both;
+    }
+    .section.active { display: block; }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTION CARD ── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(109,47,212,0.08);
+      overflow: hidden;
+      margin-top: 20px;
+    }
+    .card-header {
+      background: linear-gradient(135deg, var(--purple-50), #fff);
+      border-bottom: 3px solid var(--purple-500);
+      padding: 24px 28px 20px;
+    }
+    .card-header .section-number {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.4px;
+      text-transform: uppercase; color: var(--purple-500);
+      margin-bottom: 6px;
+    }
+    .card-header h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px; color: var(--purple-900);
+      margin-bottom: 6px; line-height: 1.3;
+    }
+    .card-header p {
+      font-size: 13px; color: var(--gray-500); line-height: 1.6;
+    }
+    .card-body { padding: 28px; }
+
+    /* ── FORM FIELDS ── */
+    .field-group {
+      margin-bottom: 22px;
+    }
+    label.field-label {
+      display: block;
+      font-size: 14px; font-weight: 600; color: var(--gray-700);
       margin-bottom: 8px;
     }
-    .header-card .subtitle { font-size: 0.85rem; color: var(--gf-muted); line-height: 1.6; }
-    .required-note { font-size: 0.78rem; color: var(--gf-muted); margin-top: 10px; }
-    .required-note span { color: var(--gf-error); }
-
-    .progress-bar-wrap { height: 5px; background: var(--gf-border); border-radius: 3px; margin-bottom: 18px; overflow: hidden; }
-    .progress-bar-fill { height: 100%; background: var(--gf-purple); border-radius: 3px; transition: width .4s ease; width: 20%; }
-
-    .section-card { background: var(--gf-surface); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 12px; padding: 24px; }
-    .section-title {
-      font-family: 'Google Sans', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--gf-purple);
-      border-bottom: 2px solid var(--gf-purple-light);
-      padding-bottom: 8px;
-      margin-bottom: 20px;
+    label.field-label .req {
+      color: var(--purple-500); margin-left: 2px;
     }
-
-    .question-block { margin-bottom: 22px; }
-    .question-block:last-child { margin-bottom: 0; }
-    .q-label { font-size: 0.92rem; font-weight: 500; margin-bottom: 10px; line-height: 1.5; }
-    .q-label .req { color: var(--gf-error); margin-left: 2px; }
-
-    .gf-input {
+    input[type="text"],
+    input[type="number"],
+    select {
       width: 100%;
-      border: none;
-      border-bottom: 1px solid var(--gf-border);
-      padding: 6px 2px;
-      font-size: 0.92rem;
-      font-family: 'Roboto', sans-serif;
-      background: transparent;
+      padding: 11px 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px; color: var(--gray-900);
+      background: var(--gray-50);
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
       outline: none;
-      transition: border-color .2s;
+      appearance: none;
+      -webkit-appearance: none;
     }
-    .gf-input:focus { border-bottom: 2px solid var(--gf-purple); }
-    .gf-input.error { border-bottom: 2px solid var(--gf-error); }
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus {
+      border-color: var(--purple-500);
+      box-shadow: 0 0 0 3px rgba(124,58,237,0.12);
+      background: #fff;
+    }
+    select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 38px; }
 
-    .radio-group { display: flex; flex-direction: column; gap: 10px; }
-    .radio-option { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.9rem; }
-    .radio-option input[type="radio"] { accent-color: var(--gf-purple); width: 16px; height: 16px; flex-shrink: 0; cursor: pointer; }
+    .field-error {
+      font-size: 12px; color: var(--error);
+      margin-top: 5px; display: none;
+      align-items: center; gap: 4px;
+    }
+    .field-error::before { content: '⚠'; font-size: 11px; }
+    .field-error.visible { display: flex; }
+    input.invalid, select.invalid { border-color: var(--error) !important; box-shadow: 0 0 0 3px rgba(220,38,38,0.10) !important; }
 
-    .screener-card { background: var(--gf-surface); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 12px; padding: 24px; border-left: 4px solid var(--gf-purple); }
+    /* ── RADIO SCREENER ── */
+    .radio-group {
+      display: flex; gap: 12px; flex-wrap: wrap;
+    }
+    .radio-pill {
+      position: relative;
+      flex: 1; min-width: 100px;
+    }
+    .radio-pill input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    .radio-pill label {
+      display: flex; align-items: center; justify-content: center;
+      padding: 12px 20px;
+      border: 2px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 14px; font-weight: 500; color: var(--gray-700);
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--gray-50);
+      text-align: center;
+      user-select: none;
+    }
+    .radio-pill input[type="radio"]:checked + label {
+      border-color: var(--purple-500);
+      background: var(--purple-50);
+      color: var(--purple-700);
+      font-weight: 600;
+      box-shadow: 0 0 0 3px rgba(124,58,237,0.10);
+    }
+    .radio-pill label:hover { border-color: var(--purple-300); background: #FAF8FF; }
 
-    .scale-hint { font-size: 0.8rem; color: var(--gf-muted); margin-bottom: 14px; }
+    /* ── LIKERT SCALE ── */
+    .likert-question {
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 20px 20px 18px;
+      margin-bottom: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .likert-question:hover { border-color: var(--purple-300); }
+    .likert-question.answered { border-color: var(--purple-300); background: var(--purple-50); }
+    .likert-question.error-q { border-color: var(--error); background: #FFF8F8; }
 
-    .likert-wrapper { overflow-x: auto; }
-    .likert-table { width: 100%; border-collapse: collapse; min-width: 380px; font-size: 0.82rem; }
-    .likert-table thead th { text-align: center; padding: 6px 4px; color: var(--gf-muted); font-weight: 500; white-space: nowrap; }
-    .likert-table thead th:first-child { text-align: left; }
-    .likert-table tbody tr { border-bottom: 1px solid var(--gf-border); }
-    .likert-table tbody tr:last-child { border-bottom: none; }
-    .likert-table tbody tr:hover { background: var(--gf-purple-light); }
-    .likert-table td { padding: 10px 4px; vertical-align: middle; }
-    .likert-table td.q-text { text-align: left; font-size: 0.85rem; line-height: 1.45; padding-right: 12px; min-width: 180px; }
-    .likert-table td.radio-cell { text-align: center; }
-    .likert-table td.radio-cell input[type="radio"] { accent-color: var(--gf-purple); width: 17px; height: 17px; cursor: pointer; }
-    .likert-table col.col-q   { width: 45%; }
-    .likert-table col.col-num { width: 11%; }
+    .q-meta {
+      display: flex; gap: 10px; margin-bottom: 14px;
+    }
+    .q-number {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      background: var(--purple-600);
+      color: #fff; border-radius: 50%;
+      font-size: 12px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .q-text {
+      font-size: 14px; line-height: 1.6; color: var(--gray-700); padding-top: 4px;
+    }
+    .q-variable {
+      display: inline-block;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase;
+      background: var(--purple-100); color: var(--purple-700);
+      padding: 2px 7px; border-radius: 4px; margin-left: 8px;
+      vertical-align: middle;
+    }
 
-    .field-error, .likert-error { color: var(--gf-error); font-size: 0.78rem; margin-top: 5px; display: none; }
-    .field-error.visible, .likert-error.visible { display: block; }
+    .likert-scale {
+      display: flex; gap: 6px;
+      align-items: stretch;
+    }
+    .scale-labels {
+      display: flex; justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .scale-label-text {
+      font-size: 11px; color: var(--gray-400); font-weight: 500;
+    }
+    .likert-option {
+      flex: 1; position: relative;
+    }
+    .likert-option input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    .likert-option label {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 4px;
+      padding: 10px 4px;
+      border: 2px solid var(--gray-200);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+      background: var(--white);
+      min-height: 58px;
+      user-select: none;
+    }
+    .likert-option label:hover { border-color: var(--purple-400); background: #FAF8FF; }
+    .likert-option input[type="radio"]:checked + label {
+      border-color: var(--purple-500);
+      background: var(--purple-600);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(124,58,237,0.30);
+    }
+    .likert-option input[type="radio"]:checked + label .scale-num { color: #fff; }
+    .scale-num {
+      font-size: 16px; font-weight: 700; color: var(--gray-700);
+      line-height: 1;
+    }
+    .scale-tiny {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.3px;
+      color: var(--gray-400); line-height: 1.2; text-align: center;
+    }
+    .likert-option input[type="radio"]:checked + label .scale-tiny { color: rgba(255,255,255,0.80); }
 
-    #thank-you-no { display: none; background: var(--gf-surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 24px; text-align: center; margin-bottom: 12px; }
-    #thank-you-no .ty-icon { font-size: 3rem; margin-bottom: 12px; }
-    #thank-you-no h2 { font-family: 'Google Sans', sans-serif; font-size: 1.3rem; margin-bottom: 8px; }
-    #thank-you-no p { color: var(--gf-muted); font-size: 0.9rem; line-height: 1.6; }
+    /* Mobile: stacked label layout for Likert */
+    @media (max-width: 560px) {
+      .likert-option label { padding: 8px 2px; min-height: 50px; }
+      .scale-tiny { display: none; }
+      .scale-num { font-size: 14px; }
+    }
 
-    #thank-you-final { display: none; background: var(--gf-surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 56px 24px; text-align: center; }
-    #thank-you-final .ty-icon { font-size: 4rem; margin-bottom: 16px; }
-    #thank-you-final h2 { font-family: 'Google Sans', sans-serif; font-size: 1.5rem; color: var(--gf-success); margin-bottom: 10px; }
-    #thank-you-final p { color: var(--gf-muted); font-size: 0.92rem; line-height: 1.7; }
+    /* ── SECTION DIVIDER (inside Section 2) ── */
+    .variable-divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 28px 0 18px;
+    }
+    .variable-divider::before, .variable-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--gray-200);
+    }
+    .variable-divider span {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+      color: var(--purple-500); white-space: nowrap;
+      background: var(--purple-50); padding: 4px 12px; border-radius: 100px;
+      border: 1px solid var(--purple-200);
+    }
 
-    .btn-row { display: flex; align-items: center; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
-    .btn-submit { background: var(--gf-purple); color: #fff; border: none; padding: 10px 28px; border-radius: 4px; font-size: 0.9rem; font-family: 'Google Sans', sans-serif; font-weight: 500; cursor: pointer; transition: background .2s; }
-    .btn-submit:hover { background: #5e35b1; }
-    .btn-submit:disabled { background: var(--gf-muted); cursor: not-allowed; }
-    .btn-clear { background: transparent; border: none; color: var(--gf-purple); font-size: 0.88rem; cursor: pointer; padding: 8px 4px; }
-    .btn-clear:hover { text-decoration: underline; }
+    /* ── BUTTONS ── */
+    .btn-row {
+      display: flex; justify-content: flex-end; gap: 12px;
+      margin-top: 28px; padding-top: 24px;
+      border-top: 1px solid var(--gray-100);
+    }
+    .btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 600;
+      padding: 12px 28px; border-radius: 8px;
+      cursor: pointer; border: none; outline: none;
+      transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--purple-700), var(--purple-500));
+      color: #fff;
+      box-shadow: 0 2px 10px rgba(124,58,237,0.35);
+    }
+    .btn-primary:hover { background: linear-gradient(135deg, var(--purple-800), var(--purple-600)); box-shadow: 0 4px 16px rgba(124,58,237,0.45); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn-ghost {
+      background: transparent; color: var(--gray-500);
+      border: 1.5px solid var(--gray-200);
+    }
+    .btn-ghost:hover { background: var(--gray-50); color: var(--gray-700); border-color: var(--gray-300); }
 
-    .spinner { display: none; width: 15px; height: 15px; border: 2px solid rgba(255,255,255,.5); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; vertical-align: middle; margin-right: 6px; }
+    /* ── SCREENER RESULT ── */
+    .screener-result {
+      display: none; text-align: center; padding: 16px 0 8px;
+    }
+    .screener-result.visible { display: block; }
+    .result-icon { font-size: 48px; margin-bottom: 16px; }
+    .result-title { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--gray-900); margin-bottom: 10px; }
+    .result-msg { font-size: 14px; color: var(--gray-500); line-height: 1.7; max-width: 420px; margin: 0 auto; }
+
+    /* ── THANK YOU / SUCCESS ── */
+    #section-success {
+      text-align: center;
+    }
+    .success-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      padding: 56px 40px;
+      margin-top: 32px;
+      border-top: 4px solid var(--purple-500);
+    }
+    .success-icon {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, var(--purple-600), var(--purple-400));
+      border-radius: 50%; margin: 0 auto 24px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 24px rgba(124,58,237,0.35);
+    }
+    .success-icon svg { width: 34px; height: 34px; stroke: #fff; }
+    .success-title { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--purple-900); margin-bottom: 14px; }
+    .success-msg { font-size: 15px; color: var(--gray-500); line-height: 1.75; max-width: 440px; margin: 0 auto; }
+
+    /* ── SPINNER ── */
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2.5px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    .spinner.active { display: block; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    .hidden { display: none !important; }
+    /* ── REQUIRED NOTICE ── */
+    .required-notice {
+      font-size: 12px; color: var(--gray-400);
+      margin-top: 4px; margin-bottom: -6px;
+    }
+    .required-notice span { color: var(--purple-500); font-weight: 700; }
 
-    .form-footer { text-align: center; color: var(--gf-muted); font-size: 0.75rem; margin-top: 24px; line-height: 1.8; }
+    /* ── TOAST ── */
+    .toast {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(60px);
+      background: var(--gray-900); color: #fff;
+      font-size: 13px; font-weight: 500;
+      padding: 12px 22px; border-radius: 100px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      opacity: 0; transition: all 0.35s; z-index: 999;
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast.error { background: var(--error); }
 
     @media (max-width: 480px) {
-      .header-card h1 { font-size: 1.3rem; }
-      .likert-table { font-size: 0.76rem; }
-      .likert-table td.q-text { min-width: 120px; }
+      .card-body { padding: 20px 16px; }
+      .btn-row { flex-direction: column-reverse; }
+      .btn { width: 100%; justify-content: center; }
+      .success-card { padding: 40px 20px; }
     }
   </style>
 </head>
 <body>
-<div class="form-wrapper" id="formWrapper">
 
-  <div class="header-card">
-    <div class="header-card-body">
-      <h1>Customer Advocacy in EdTech</h1>
-      <p class="subtitle">
-        This survey is part of an MBA research project at <strong>IIT Mandi</strong>.
-        It examines factors influencing customer advocacy among EdTech platform users in India.
-        Participation is voluntary and all responses are strictly confidential.
-        <br><br>Estimated time: <strong>5–8 minutes</strong>
-      </p>
-      <p class="required-note"><span>*</span> Required question</p>
+<!-- ════════════ HEADER ════════════ -->
+<div class="survey-header">
+  <div class="header-inner">
+    <div class="header-tag">Research Survey</div>
+    <h1 class="survey-title">EdTech Platform Experience &amp;<br>Learner Advocacy Study</h1>
+    <p class="survey-desc">This survey is part of an academic research project examining learner satisfaction, trust, and advocacy behaviour on paid EdTech platforms. Your responses are anonymous and greatly appreciated.</p>
+    <div class="header-progress-bar">
+      <div class="header-progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-meta">
+      <span class="progress-label" id="progressLabel">Section 1 of 3 — Demographics</span>
+      <span class="progress-pct" id="progressPct">0%</span>
     </div>
   </div>
+</div>
 
-  <div class="progress-bar-wrap">
-    <div class="progress-bar-fill" id="progressBar"></div>
-  </div>
+<!-- ════════════ BODY ════════════ -->
+<div class="survey-body">
 
-  <!-- ── SECTION A ── -->
-  <div class="section-card">
-    <div class="section-title">👤 Section A — Respondent Profile</div>
-
-    <div class="question-block">
-      <div class="q-label">What is your name? <span class="req">*</span></div>
-      <input class="gf-input" type="text" id="name" placeholder="Your full name" autocomplete="name" />
-      <div class="field-error" id="err-name">Please enter your name.</div>
-    </div>
-
-    <div class="question-block">
-      <div class="q-label">What is your age? <span class="req">*</span></div>
-      <input class="gf-input" type="number" id="age" placeholder="e.g. 22" min="15" max="80" />
-      <div class="field-error" id="err-age">Please enter a valid numeric age (15–80).</div>
-    </div>
-
-    <div class="question-block">
-      <div class="q-label">What is your gender? <span class="req">*</span></div>
-      <div class="radio-group">
-        <label class="radio-option"><input type="radio" name="gender" value="Male" /><span>Male</span></label>
-        <label class="radio-option"><input type="radio" name="gender" value="Female" /><span>Female</span></label>
-        <label class="radio-option"><input type="radio" name="gender" value="Prefer not to say" /><span>Prefer not to say</span></label>
+  <!-- ── SECTION 1: DEMOGRAPHICS ── -->
+  <div class="section active" id="section-1">
+    <div class="card">
+      <div class="card-header">
+        <div class="section-number">Section 1 of 3</div>
+        <h2>Respondent Demographics</h2>
+        <p>Please provide basic background information. All fields are required.</p>
       </div>
-      <div class="field-error" id="err-gender">Please select your gender.</div>
-    </div>
+      <div class="card-body">
+        <p class="required-notice"><span>*</span> indicates a required field</p>
 
-    <div class="question-block">
-      <div class="q-label">What is your current education level? <span class="req">*</span></div>
-      <div class="radio-group">
-        <label class="radio-option"><input type="radio" name="education" value="Undergraduate" /><span>Undergraduate</span></label>
-        <label class="radio-option"><input type="radio" name="education" value="Postgraduate" /><span>Postgraduate</span></label>
-        <label class="radio-option"><input type="radio" name="education" value="Professional course" /><span>Professional course</span></label>
-        <label class="radio-option"><input type="radio" name="education" value="Other" /><span>Other</span></label>
-      </div>
-      <div class="field-error" id="err-education">Please select your education level.</div>
-    </div>
+        <div class="field-group" style="margin-top:18px">
+          <label class="field-label" for="f_name">Full Name <span class="req">*</span></label>
+          <input type="text" id="f_name" placeholder="e.g. Priya Sharma" autocomplete="name"/>
+          <div class="field-error" id="err_name">Please enter your full name.</div>
+        </div>
 
-    <div class="question-block">
-      <div class="q-label">Which EdTech platform do you use the most? <span class="req">*</span></div>
-      <div class="radio-group">
-        <label class="radio-option"><input type="radio" name="platform" value="YouTube" /><span>YouTube</span></label>
-        <label class="radio-option"><input type="radio" name="platform" value="Unacademy" /><span>Unacademy</span></label>
-        <label class="radio-option"><input type="radio" name="platform" value="BYJU'S" /><span>BYJU'S</span></label>
-        <label class="radio-option"><input type="radio" name="platform" value="Physics Wallah" /><span>Physics Wallah</span></label>
-        <label class="radio-option"><input type="radio" name="platform" value="Vedantu" /><span>Vedantu</span></label>
-        <label class="radio-option"><input type="radio" name="platform" value="Udemy" /><span>Udemy</span></label>
-        <label class="radio-option"><input type="radio" name="platform" value="Other" /><span>Other</span></label>
-      </div>
-      <div class="field-error" id="err-platform">Please select a platform.</div>
-    </div>
+        <div class="field-group">
+          <label class="field-label" for="f_age">Age <span class="req">*</span></label>
+          <input type="number" id="f_age" placeholder="e.g. 24" min="10" max="100"/>
+          <div class="field-error" id="err_age">Please enter a valid age (10–100).</div>
+        </div>
 
-    <div class="question-block">
-      <div class="q-label">How long have you been using this platform? <span class="req">*</span></div>
-      <div class="radio-group">
-        <label class="radio-option"><input type="radio" name="duration" value="Less than 6 months" /><span>Less than 6 months</span></label>
-        <label class="radio-option"><input type="radio" name="duration" value="6–12 months" /><span>6–12 months</span></label>
-        <label class="radio-option"><input type="radio" name="duration" value="1–2 years" /><span>1–2 years</span></label>
-        <label class="radio-option"><input type="radio" name="duration" value="More than 2 years" /><span>More than 2 years</span></label>
+        <div class="field-group">
+          <label class="field-label" for="f_gender">Gender <span class="req">*</span></label>
+          <select id="f_gender">
+            <option value="">— Select —</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Non-binary / Gender diverse</option>
+            <option>Prefer not to say</option>
+          </select>
+          <div class="field-error" id="err_gender">Please select your gender.</div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="f_edu">Education Level <span class="req">*</span></label>
+          <select id="f_edu">
+            <option value="">— Select —</option>
+            <option>High School / Secondary</option>
+            <option>Undergraduate (Bachelor's)</option>
+            <option>Postgraduate (Master's)</option>
+            <option>Doctoral (PhD)</option>
+            <option>Diploma / Vocational</option>
+            <option>Other</option>
+          </select>
+          <div class="field-error" id="err_edu">Please select your education level.</div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="f_platform">Primary EdTech Platform Used <span class="req">*</span></label>
+          <select id="f_platform">
+            <option value="">— Select —</option>
+            <option>Coursera</option>
+            <option>Udemy</option>
+            <option>edX</option>
+            <option>BYJU'S</option>
+            <option>Unacademy</option>
+            <option>upGrad</option>
+            <option>Great Learning</option>
+            <option>Simplilearn</option>
+            <option>Khan Academy (Paid)</option>
+            <option>LinkedIn Learning</option>
+            <option>Other</option>
+          </select>
+          <div class="field-error" id="err_platform">Please select a platform.</div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="f_duration">Duration of Use <span class="req">*</span></label>
+          <select id="f_duration">
+            <option value="">— Select —</option>
+            <option>Less than 3 months</option>
+            <option>3–6 months</option>
+            <option>6–12 months</option>
+            <option>1–2 years</option>
+            <option>More than 2 years</option>
+          </select>
+          <div class="field-error" id="err_duration">Please select your duration of use.</div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="submitSection1()">
+            Continue
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
       </div>
-      <div class="field-error" id="err-duration">Please select duration of use.</div>
     </div>
   </div>
 
   <!-- ── SCREENER ── -->
-  <div class="screener-card">
-    <div class="q-label" style="font-size:1rem;">Have you used paid courses on any EdTech platform? <span class="req">*</span></div>
-    <div class="radio-group" style="flex-direction:row; gap:24px; margin-top:12px;">
-      <label class="radio-option"><input type="radio" name="paid_courses" value="Yes" onchange="handleBranch('Yes')" /><span>Yes</span></label>
-      <label class="radio-option"><input type="radio" name="paid_courses" value="No"  onchange="handleBranch('No')"  /><span>No</span></label>
-    </div>
-    <div class="field-error" id="err-paid">Please answer this question.</div>
-  </div>
+  <div class="section" id="section-screener">
+    <div class="card">
+      <div class="card-header">
+        <div class="section-number">Eligibility Check</div>
+        <h2>Paid Course Usage</h2>
+        <p>Your answer determines whether you qualify to complete this survey.</p>
+      </div>
+      <div class="card-body">
 
-  <!-- ── THANK YOU (No branch) ── -->
-  <div id="thank-you-no">
-    <div class="ty-icon">🙏</div>
-    <h2>Thank you for your response!</h2>
-    <p>Since you haven't used paid EdTech courses, the remaining questions are not applicable.<br>
-    Please click <strong>Submit</strong> to record your response.</p>
-    <div class="btn-row" style="justify-content:center; margin-top:20px;">
-      <button class="btn-submit" id="btn-no" onclick="submitSurvey()">
-        <span class="spinner" id="spin-no"></span>Submit Response
-      </button>
-    </div>
-  </div>
+        <div class="field-group">
+          <label class="field-label">Have you used paid courses on any EdTech platform? <span class="req">*</span></label>
+          <div class="radio-group">
+            <div class="radio-pill">
+              <input type="radio" name="paid" id="paid_yes" value="Yes"/>
+              <label for="paid_yes">✓ &nbsp;Yes</label>
+            </div>
+            <div class="radio-pill">
+              <input type="radio" name="paid" id="paid_no" value="No"/>
+              <label for="paid_no">✗ &nbsp;No</label>
+            </div>
+          </div>
+          <div class="field-error" id="err_paid">Please select an option.</div>
+        </div>
 
-  <!-- ── SECTION B ── -->
-  <div class="section-card hidden" id="sectionB">
-    <div class="section-title">📚 Section B — Service Quality &amp; Content Relevance</div>
-    <p class="scale-hint">1 = Strongly Disagree &nbsp;|&nbsp; 3 = Neutral &nbsp;|&nbsp; 5 = Strongly Agree</p>
-    <div class="likert-wrapper">
-      <table class="likert-table">
-        <colgroup><col class="col-q"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/></colgroup>
-        <thead><tr><th></th><th>SD<br>1</th><th>2</th><th>3</th><th>4</th><th>SA<br>5</th></tr></thead>
-        <tbody>
-          <tr><td class="q-text">The content on my preferred EdTech platform is relevant to my learning goals.</td><td class="radio-cell"><input type="radio" name="sq_rel_1" value="1"/></td><td class="radio-cell"><input type="radio" name="sq_rel_1" value="2"/></td><td class="radio-cell"><input type="radio" name="sq_rel_1" value="3"/></td><td class="radio-cell"><input type="radio" name="sq_rel_1" value="4"/></td><td class="radio-cell"><input type="radio" name="sq_rel_1" value="5"/></td></tr>
-          <tr><td class="q-text">The teaching on this platform helps me genuinely understand concepts, not just memorize.</td><td class="radio-cell"><input type="radio" name="sq_rel_2" value="1"/></td><td class="radio-cell"><input type="radio" name="sq_rel_2" value="2"/></td><td class="radio-cell"><input type="radio" name="sq_rel_2" value="3"/></td><td class="radio-cell"><input type="radio" name="sq_rel_2" value="4"/></td><td class="radio-cell"><input type="radio" name="sq_rel_2" value="5"/></td></tr>
-          <tr><td class="q-text">The course content is well-aligned with the examinations or outcomes I am preparing for.</td><td class="radio-cell"><input type="radio" name="sq_rel_3" value="1"/></td><td class="radio-cell"><input type="radio" name="sq_rel_3" value="2"/></td><td class="radio-cell"><input type="radio" name="sq_rel_3" value="3"/></td><td class="radio-cell"><input type="radio" name="sq_rel_3" value="4"/></td><td class="radio-cell"><input type="radio" name="sq_rel_3" value="5"/></td></tr>
-          <tr><td class="q-text">I watch free videos (e.g., on YouTube) to evaluate a platform's content quality before purchasing.</td><td class="radio-cell"><input type="radio" name="sq_rel_4" value="1"/></td><td class="radio-cell"><input type="radio" name="sq_rel_4" value="2"/></td><td class="radio-cell"><input type="radio" name="sq_rel_4" value="3"/></td><td class="radio-cell"><input type="radio" name="sq_rel_4" value="4"/></td><td class="radio-cell"><input type="radio" name="sq_rel_4" value="5"/></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="likert-error" id="err-sectionB">Please answer all questions in this section.</div>
-  </div>
+        <!-- Ineligible message -->
+        <div class="screener-result" id="screener-no">
+          <div class="result-icon">🙏</div>
+          <div class="result-title">Thank You for Your Interest</div>
+          <div class="result-msg">This survey is designed specifically for learners who have purchased and used paid courses on an EdTech platform. We appreciate your time and participation.</div>
+        </div>
 
-  <!-- ── SECTION C ── -->
-  <div class="section-card hidden" id="sectionC">
-    <div class="section-title">🎓 Section C — Faculty Trust &amp; Consistency</div>
-    <p class="scale-hint">1 = Strongly Disagree &nbsp;|&nbsp; 3 = Neutral &nbsp;|&nbsp; 5 = Strongly Agree</p>
-    <div class="likert-wrapper">
-      <table class="likert-table">
-        <colgroup><col class="col-q"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/></colgroup>
-        <thead><tr><th></th><th>SD<br>1</th><th>2</th><th>3</th><th>4</th><th>SA<br>5</th></tr></thead>
-        <tbody>
-          <tr><td class="q-text">The instructors on this platform demonstrate a high level of expertise in their subject matter.</td><td class="radio-cell"><input type="radio" name="ft_exp_1" value="1"/></td><td class="radio-cell"><input type="radio" name="ft_exp_1" value="2"/></td><td class="radio-cell"><input type="radio" name="ft_exp_1" value="3"/></td><td class="radio-cell"><input type="radio" name="ft_exp_1" value="4"/></td><td class="radio-cell"><input type="radio" name="ft_exp_1" value="5"/></td></tr>
-          <tr><td class="q-text">The reputation and academic credentials of the faculty were a primary factor in my decision to use this platform.</td><td class="radio-cell"><input type="radio" name="ft_cred_2" value="1"/></td><td class="radio-cell"><input type="radio" name="ft_cred_2" value="2"/></td><td class="radio-cell"><input type="radio" name="ft_cred_2" value="3"/></td><td class="radio-cell"><input type="radio" name="ft_cred_2" value="4"/></td><td class="radio-cell"><input type="radio" name="ft_cred_2" value="5"/></td></tr>
-          <tr><td class="q-text">The quality of teaching remains consistently high throughout all the modules and lectures provided.</td><td class="radio-cell"><input type="radio" name="ft_con_3" value="1"/></td><td class="radio-cell"><input type="radio" name="ft_con_3" value="2"/></td><td class="radio-cell"><input type="radio" name="ft_con_3" value="3"/></td><td class="radio-cell"><input type="radio" name="ft_con_3" value="4"/></td><td class="radio-cell"><input type="radio" name="ft_con_3" value="5"/></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="likert-error" id="err-sectionC">Please answer all questions in this section.</div>
-  </div>
+        <div class="btn-row" id="screener-btn-row">
+          <button class="btn btn-ghost" onclick="goBack('section-screener','section-1')">← Back</button>
+          <button class="btn btn-primary" onclick="submitScreener()">
+            Continue
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
 
-  <!-- ── SECTION D ── -->
-  <div class="section-card hidden" id="sectionD">
-    <div class="section-title">🔍 Section D — Honesty &amp; Review Credibility</div>
-    <p class="scale-hint">1 = Strongly Disagree &nbsp;|&nbsp; 3 = Neutral &nbsp;|&nbsp; 5 = Strongly Agree</p>
-    <div class="likert-wrapper">
-      <table class="likert-table">
-        <colgroup><col class="col-q"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/></colgroup>
-        <thead><tr><th></th><th>SD<br>1</th><th>2</th><th>3</th><th>4</th><th>SA<br>5</th></tr></thead>
-        <tbody>
-          <tr><td class="q-text">I believe this platform is honest in its marketing and success claims.</td><td class="radio-cell"><input type="radio" name="hrc_hon_1" value="1"/></td><td class="radio-cell"><input type="radio" name="hrc_hon_1" value="2"/></td><td class="radio-cell"><input type="radio" name="hrc_hon_1" value="3"/></td><td class="radio-cell"><input type="radio" name="hrc_hon_1" value="4"/></td><td class="radio-cell"><input type="radio" name="hrc_hon_1" value="5"/></td></tr>
-          <tr><td class="q-text">I find the online reviews and ratings of EdTech platforms to be generally trustworthy.</td><td class="radio-cell"><input type="radio" name="hrc_rev_2" value="1"/></td><td class="radio-cell"><input type="radio" name="hrc_rev_2" value="2"/></td><td class="radio-cell"><input type="radio" name="hrc_rev_2" value="3"/></td><td class="radio-cell"><input type="radio" name="hrc_rev_2" value="4"/></td><td class="radio-cell"><input type="radio" name="hrc_rev_2" value="5"/></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="likert-error" id="err-sectionD">Please answer all questions in this section.</div>
-  </div>
-
-  <!-- ── SECTION E ── -->
-  <div class="section-card hidden" id="sectionE">
-    <div class="section-title">💰 Section E — Price &amp; Value Perception</div>
-    <p class="scale-hint">1 = Strongly Disagree &nbsp;|&nbsp; 3 = Neutral &nbsp;|&nbsp; 5 = Strongly Agree</p>
-    <div class="likert-wrapper">
-      <table class="likert-table">
-        <colgroup><col class="col-q"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/></colgroup>
-        <thead><tr><th></th><th>SD<br>1</th><th>2</th><th>3</th><th>4</th><th>SA<br>5</th></tr></thead>
-        <tbody>
-          <tr><td class="q-text">The fees charged by my preferred EdTech platform are reasonable for the quality provided.</td><td class="radio-cell"><input type="radio" name="pv_fee_1" value="1"/></td><td class="radio-cell"><input type="radio" name="pv_fee_1" value="2"/></td><td class="radio-cell"><input type="radio" name="pv_fee_1" value="3"/></td><td class="radio-cell"><input type="radio" name="pv_fee_1" value="4"/></td><td class="radio-cell"><input type="radio" name="pv_fee_1" value="5"/></td></tr>
-          <tr><td class="q-text">I prefer to first use free content (e.g., YouTube) before investing in paid courses.</td><td class="radio-cell"><input type="radio" name="pv_free_2" value="1"/></td><td class="radio-cell"><input type="radio" name="pv_free_2" value="2"/></td><td class="radio-cell"><input type="radio" name="pv_free_2" value="3"/></td><td class="radio-cell"><input type="radio" name="pv_free_2" value="4"/></td><td class="radio-cell"><input type="radio" name="pv_free_2" value="5"/></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="likert-error" id="err-sectionE">Please answer all questions in this section.</div>
-  </div>
-
-  <!-- ── SECTION F ── -->
-  <div class="section-card hidden" id="sectionF">
-    <div class="section-title">🤝 Section F — Faculty–Student Connection</div>
-    <p class="scale-hint">1 = Strongly Disagree &nbsp;|&nbsp; 3 = Neutral &nbsp;|&nbsp; 5 = Strongly Agree</p>
-    <div class="likert-wrapper">
-      <table class="likert-table">
-        <colgroup><col class="col-q"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/></colgroup>
-        <thead><tr><th></th><th>SD<br>1</th><th>2</th><th>3</th><th>4</th><th>SA<br>5</th></tr></thead>
-        <tbody>
-          <tr><td class="q-text">I feel a personal connection with the faculty on my preferred EdTech platform.</td><td class="radio-cell"><input type="radio" name="fsc_con_1" value="1"/></td><td class="radio-cell"><input type="radio" name="fsc_con_1" value="2"/></td><td class="radio-cell"><input type="radio" name="fsc_con_1" value="3"/></td><td class="radio-cell"><input type="radio" name="fsc_con_1" value="4"/></td><td class="radio-cell"><input type="radio" name="fsc_con_1" value="5"/></td></tr>
-          <tr><td class="q-text">The faculty on my platform recognize or acknowledge consistent students.</td><td class="radio-cell"><input type="radio" name="fsc_rec_2" value="1"/></td><td class="radio-cell"><input type="radio" name="fsc_rec_2" value="2"/></td><td class="radio-cell"><input type="radio" name="fsc_rec_2" value="3"/></td><td class="radio-cell"><input type="radio" name="fsc_rec_2" value="4"/></td><td class="radio-cell"><input type="radio" name="fsc_rec_2" value="5"/></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="likert-error" id="err-sectionF">Please answer all questions in this section.</div>
-  </div>
-
-  <!-- ── SECTION G ── -->
-  <div class="section-card hidden" id="sectionG">
-    <div class="section-title">💬 Section G — Interaction &amp; Belonging</div>
-    <p class="scale-hint">1 = Strongly Disagree &nbsp;|&nbsp; 3 = Neutral &nbsp;|&nbsp; 5 = Strongly Agree</p>
-    <div class="likert-wrapper">
-      <table class="likert-table">
-        <colgroup><col class="col-q"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/></colgroup>
-        <thead><tr><th></th><th>SD<br>1</th><th>2</th><th>3</th><th>4</th><th>SA<br>5</th></tr></thead>
-        <tbody>
-          <tr><td class="q-text">Two-way interaction (e.g., live video, Q&amp;A) is important for my learning experience.</td><td class="radio-cell"><input type="radio" name="ib_int_1" value="1"/></td><td class="radio-cell"><input type="radio" name="ib_int_1" value="2"/></td><td class="radio-cell"><input type="radio" name="ib_int_1" value="3"/></td><td class="radio-cell"><input type="radio" name="ib_int_1" value="4"/></td><td class="radio-cell"><input type="radio" name="ib_int_1" value="5"/></td></tr>
-          <tr><td class="q-text">I actively participate in discussion forums, chats, or Q&amp;A sections on my EdTech platform.</td><td class="radio-cell"><input type="radio" name="ib_par_2" value="1"/></td><td class="radio-cell"><input type="radio" name="ib_par_2" value="2"/></td><td class="radio-cell"><input type="radio" name="ib_par_2" value="3"/></td><td class="radio-cell"><input type="radio" name="ib_par_2" value="4"/></td><td class="radio-cell"><input type="radio" name="ib_par_2" value="5"/></td></tr>
-          <tr><td class="q-text">I feel a sense of belonging to the community of learners on my preferred platform.</td><td class="radio-cell"><input type="radio" name="ib_bel_3" value="1"/></td><td class="radio-cell"><input type="radio" name="ib_bel_3" value="2"/></td><td class="radio-cell"><input type="radio" name="ib_bel_3" value="3"/></td><td class="radio-cell"><input type="radio" name="ib_bel_3" value="4"/></td><td class="radio-cell"><input type="radio" name="ib_bel_3" value="5"/></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="likert-error" id="err-sectionG">Please answer all questions in this section.</div>
-  </div>
-
-  <!-- ── SECTION H ── -->
-  <div class="section-card hidden" id="sectionH">
-    <div class="section-title">⭐ Section H — Overall Satisfaction &amp; Decision Quality</div>
-    <p class="scale-hint">1 = Strongly Disagree &nbsp;|&nbsp; 3 = Neutral &nbsp;|&nbsp; 5 = Strongly Agree</p>
-    <div class="likert-wrapper">
-      <table class="likert-table">
-        <colgroup><col class="col-q"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/></colgroup>
-        <thead><tr><th></th><th>SD<br>1</th><th>2</th><th>3</th><th>4</th><th>SA<br>5</th></tr></thead>
-        <tbody>
-          <tr><td class="q-text">Overall, my experience with this EdTech platform has been highly satisfactory.</td><td class="radio-cell"><input type="radio" name="os_sat_1" value="1"/></td><td class="radio-cell"><input type="radio" name="os_sat_1" value="2"/></td><td class="radio-cell"><input type="radio" name="os_sat_1" value="3"/></td><td class="radio-cell"><input type="radio" name="os_sat_1" value="4"/></td><td class="radio-cell"><input type="radio" name="os_sat_1" value="5"/></td></tr>
-          <tr><td class="q-text">The platform has successfully met my expectations regarding the quality of learning.</td><td class="radio-cell"><input type="radio" name="os_met_2" value="1"/></td><td class="radio-cell"><input type="radio" name="os_met_2" value="2"/></td><td class="radio-cell"><input type="radio" name="os_met_2" value="3"/></td><td class="radio-cell"><input type="radio" name="os_met_2" value="4"/></td><td class="radio-cell"><input type="radio" name="os_met_2" value="5"/></td></tr>
-          <tr><td class="q-text">I am confident that choosing this platform was the right decision compared to other available options.</td><td class="radio-cell"><input type="radio" name="os_dec_3" value="1"/></td><td class="radio-cell"><input type="radio" name="os_dec_3" value="2"/></td><td class="radio-cell"><input type="radio" name="os_dec_3" value="3"/></td><td class="radio-cell"><input type="radio" name="os_dec_3" value="4"/></td><td class="radio-cell"><input type="radio" name="os_dec_3" value="5"/></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="likert-error" id="err-sectionH">Please answer all questions in this section.</div>
-  </div>
-
-  <!-- ── SECTION I ── -->
-  <div class="section-card hidden" id="sectionI">
-    <div class="section-title">📣 Section I — Word-of-Mouth &amp; Customer Advocacy</div>
-    <p class="scale-hint">1 = Strongly Disagree &nbsp;|&nbsp; 3 = Neutral &nbsp;|&nbsp; 5 = Strongly Agree</p>
-    <div class="likert-wrapper">
-      <table class="likert-table">
-        <colgroup><col class="col-q"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/></colgroup>
-        <thead><tr><th></th><th>SD<br>1</th><th>2</th><th>3</th><th>4</th><th>SA<br>5</th></tr></thead>
-        <tbody>
-          <tr><td class="q-text">I would actively recommend my preferred EdTech platform to friends, family, or classmates.</td><td class="radio-cell"><input type="radio" name="ca_rec_1" value="1"/></td><td class="radio-cell"><input type="radio" name="ca_rec_1" value="2"/></td><td class="radio-cell"><input type="radio" name="ca_rec_1" value="3"/></td><td class="radio-cell"><input type="radio" name="ca_rec_1" value="4"/></td><td class="radio-cell"><input type="radio" name="ca_rec_1" value="5"/></td></tr>
-          <tr><td class="q-text">I frequently speak positively about my preferred EdTech platform in my social circle.</td><td class="radio-cell"><input type="radio" name="ca_pos_2" value="1"/></td><td class="radio-cell"><input type="radio" name="ca_pos_2" value="2"/></td><td class="radio-cell"><input type="radio" name="ca_pos_2" value="3"/></td><td class="radio-cell"><input type="radio" name="ca_pos_2" value="4"/></td><td class="radio-cell"><input type="radio" name="ca_pos_2" value="5"/></td></tr>
-          <tr><td class="q-text">I would defend my preferred EdTech platform if someone criticized it.</td><td class="radio-cell"><input type="radio" name="ca_def_3" value="1"/></td><td class="radio-cell"><input type="radio" name="ca_def_3" value="2"/></td><td class="radio-cell"><input type="radio" name="ca_def_3" value="3"/></td><td class="radio-cell"><input type="radio" name="ca_def_3" value="4"/></td><td class="radio-cell"><input type="radio" name="ca_def_3" value="5"/></td></tr>
-          <tr><td class="q-text">I would share or engage with positive content about this platform on social media or student forums.</td><td class="radio-cell"><input type="radio" name="ca_sha_4" value="1"/></td><td class="radio-cell"><input type="radio" name="ca_sha_4" value="2"/></td><td class="radio-cell"><input type="radio" name="ca_sha_4" value="3"/></td><td class="radio-cell"><input type="radio" name="ca_sha_4" value="4"/></td><td class="radio-cell"><input type="radio" name="ca_sha_4" value="5"/></td></tr>
-          <tr><td class="q-text">I intend to purchase future courses or continue using this platform for my upcoming educational needs.</td><td class="radio-cell"><input type="radio" name="ca_int_5" value="1"/></td><td class="radio-cell"><input type="radio" name="ca_int_5" value="2"/></td><td class="radio-cell"><input type="radio" name="ca_int_5" value="3"/></td><td class="radio-cell"><input type="radio" name="ca_int_5" value="4"/></td><td class="radio-cell"><input type="radio" name="ca_int_5" value="5"/></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="likert-error" id="err-sectionI">Please answer all questions in this section.</div>
-  </div>
-
-  <!-- ── SUBMIT (Yes-branch) ── -->
-  <div class="section-card hidden" id="submitCard">
-    <p style="font-size:0.85rem;color:var(--gf-muted);margin-bottom:16px;">
-      Thank you for completing this survey. Your responses are strictly confidential and used solely for academic research.
-    </p>
-    <div class="btn-row">
-      <button class="btn-submit" id="btn-yes" onclick="submitSurvey()">
-        <span class="spinner" id="spin-yes"></span>Submit Response
-      </button>
-      <button class="btn-clear" onclick="clearForm()">Clear form</button>
+      </div>
     </div>
   </div>
 
-  <!-- ── FINAL THANK YOU ── -->
-  <div id="thank-you-final">
-    <div class="ty-icon">✅</div>
-    <h2>Response Submitted Successfully!</h2>
-    <p>
-      Thank you for your valuable participation in this research on<br>
-      <strong>Customer Advocacy in EdTech</strong>.<br><br>
-      Your response has been recorded securely.<br>
-      This study is part of an MBA programme at <strong>IIT Mandi</strong>.
-    </p>
+  <!-- ── SECTION 2: LIKERT SCALE ── -->
+  <div class="section" id="section-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="section-number">Section 2 of 3 — Perception &amp; Behaviour Scale</div>
+        <h2>Rate Your Experience</h2>
+        <p>For each statement, indicate your level of agreement on a 5-point scale: <strong>1 = Strongly Disagree</strong> → <strong>5 = Strongly Agree</strong></p>
+      </div>
+      <div class="card-body" id="likert-body">
+
+        <!-- Scale Legend -->
+        <div style="display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;">
+          <span style="font-size:11px;background:var(--gray-100);border-radius:6px;padding:5px 10px;color:var(--gray-600);">1 = Strongly Disagree</span>
+          <span style="font-size:11px;background:var(--gray-100);border-radius:6px;padding:5px 10px;color:var(--gray-600);">2 = Disagree</span>
+          <span style="font-size:11px;background:var(--gray-100);border-radius:6px;padding:5px 10px;color:var(--gray-600);">3 = Neutral</span>
+          <span style="font-size:11px;background:var(--gray-100);border-radius:6px;padding:5px 10px;color:var(--gray-600);">4 = Agree</span>
+          <span style="font-size:11px;background:var(--purple-100);border-radius:6px;padding:5px 10px;color:var(--purple-700);font-weight:600;">5 = Strongly Agree</span>
+        </div>
+
+        <!-- VARIABLE: sq_rel -->
+        <div class="variable-divider"><span>Service Quality — Relevance (sq_rel)</span></div>
+
+        <!-- Q1 -->
+        <div class="likert-question" id="qcard_Q1">
+          <div class="q-meta">
+            <div class="q-number">1</div>
+            <div class="q-text">The course topics covered on this platform directly match what I need to learn for my academic or professional goals.<span class="q-variable">sq_rel</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q1">
+            <div class="likert-option"><input type="radio" name="Q1" id="Q1_1" value="1"/><label for="Q1_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q1" id="Q1_2" value="2"/><label for="Q1_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q1" id="Q1_3" value="3"/><label for="Q1_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q1" id="Q1_4" value="4"/><label for="Q1_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q1" id="Q1_5" value="5"/><label for="Q1_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="likert-question" id="qcard_Q2">
+          <div class="q-meta">
+            <div class="q-number">2</div>
+            <div class="q-text">The teaching style on this platform helps me develop a conceptual understanding of the subject matter.<span class="q-variable">sq_rel</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q2">
+            <div class="likert-option"><input type="radio" name="Q2" id="Q2_1" value="1"/><label for="Q2_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q2" id="Q2_2" value="2"/><label for="Q2_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q2" id="Q2_3" value="3"/><label for="Q2_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q2" id="Q2_4" value="4"/><label for="Q2_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q2" id="Q2_5" value="5"/><label for="Q2_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="likert-question" id="qcard_Q3">
+          <div class="q-meta">
+            <div class="q-number">3</div>
+            <div class="q-text">The study material on this platform is current and aligned with the syllabus or certification I am targeting.<span class="q-variable">sq_rel</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q3">
+            <div class="likert-option"><input type="radio" name="Q3" id="Q3_1" value="1"/><label for="Q3_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q3" id="Q3_2" value="2"/><label for="Q3_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q3" id="Q3_3" value="3"/><label for="Q3_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q3" id="Q3_4" value="4"/><label for="Q3_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q3" id="Q3_5" value="5"/><label for="Q3_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="likert-question" id="qcard_Q4">
+          <div class="q-meta">
+            <div class="q-number">4</div>
+            <div class="q-text">The faculty on this platform demonstrate deep subject-matter expertise that enhances the quality of my learning.<span class="q-variable">sq_rel</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q4">
+            <div class="likert-option"><input type="radio" name="Q4" id="Q4_1" value="1"/><label for="Q4_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q4" id="Q4_2" value="2"/><label for="Q4_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q4" id="Q4_3" value="3"/><label for="Q4_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q4" id="Q4_4" value="4"/><label for="Q4_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q4" id="Q4_5" value="5"/><label for="Q4_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- VARIABLE: pv_val -->
+        <div class="variable-divider"><span>Perceived Value (pv_val)</span></div>
+
+        <!-- Q5 -->
+        <div class="likert-question" id="qcard_Q5">
+          <div class="q-meta">
+            <div class="q-number">5</div>
+            <div class="q-text">The learning outcomes I have achieved on this platform are worth the financial and time investment I have made.<span class="q-variable">pv_val</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q5">
+            <div class="likert-option"><input type="radio" name="Q5" id="Q5_1" value="1"/><label for="Q5_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q5" id="Q5_2" value="2"/><label for="Q5_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q5" id="Q5_3" value="3"/><label for="Q5_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q5" id="Q5_4" value="4"/><label for="Q5_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q5" id="Q5_5" value="5"/><label for="Q5_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="likert-question" id="qcard_Q6">
+          <div class="q-meta">
+            <div class="q-number">6</div>
+            <div class="q-text">I routinely assess a platform's teaching quality through its free sample content before committing to a paid course.<span class="q-variable">pv_val</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q6">
+            <div class="likert-option"><input type="radio" name="Q6" id="Q6_1" value="1"/><label for="Q6_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q6" id="Q6_2" value="2"/><label for="Q6_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q6" id="Q6_3" value="3"/><label for="Q6_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q6" id="Q6_4" value="4"/><label for="Q6_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q6" id="Q6_5" value="5"/><label for="Q6_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="likert-question" id="qcard_Q7">
+          <div class="q-meta">
+            <div class="q-number">7</div>
+            <div class="q-text">Compared to other EdTech platforms I am aware of, this platform offers a better learning experience for the price I paid.<span class="q-variable">pv_val</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q7">
+            <div class="likert-option"><input type="radio" name="Q7" id="Q7_1" value="1"/><label for="Q7_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q7" id="Q7_2" value="2"/><label for="Q7_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q7" id="Q7_3" value="3"/><label for="Q7_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q7" id="Q7_4" value="4"/><label for="Q7_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q7" id="Q7_5" value="5"/><label for="Q7_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- VARIABLE: bt_trust -->
+        <div class="variable-divider"><span>Brand Trust (bt_trust)</span></div>
+
+        <!-- Q8 -->
+        <div class="likert-question" id="qcard_Q8">
+          <div class="q-meta">
+            <div class="q-number">8</div>
+            <div class="q-text">This platform accurately represents what learners can realistically expect to achieve after completing its courses.<span class="q-variable">bt_trust</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q8">
+            <div class="likert-option"><input type="radio" name="Q8" id="Q8_1" value="1"/><label for="Q8_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q8" id="Q8_2" value="2"/><label for="Q8_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q8" id="Q8_3" value="3"/><label for="Q8_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q8" id="Q8_4" value="4"/><label for="Q8_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q8" id="Q8_5" value="5"/><label for="Q8_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="likert-question" id="qcard_Q9">
+          <div class="q-meta">
+            <div class="q-number">9</div>
+            <div class="q-text">The academic qualifications and professional background of the instructors on this platform give me confidence in the content they deliver.<span class="q-variable">bt_trust</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q9">
+            <div class="likert-option"><input type="radio" name="Q9" id="Q9_1" value="1"/><label for="Q9_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q9" id="Q9_2" value="2"/><label for="Q9_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q9" id="Q9_3" value="3"/><label for="Q9_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q9" id="Q9_4" value="4"/><label for="Q9_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q9" id="Q9_5" value="5"/><label for="Q9_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- Q10 -->
+        <div class="likert-question" id="qcard_Q10">
+          <div class="q-meta">
+            <div class="q-number">10</div>
+            <div class="q-text">I believe this platform consistently prioritises the learning experience of its students over its own commercial interests.<span class="q-variable">bt_trust</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q10">
+            <div class="likert-option"><input type="radio" name="Q10" id="Q10_1" value="1"/><label for="Q10_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q10" id="Q10_2" value="2"/><label for="Q10_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q10" id="Q10_3" value="3"/><label for="Q10_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q10" id="Q10_4" value="4"/><label for="Q10_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q10" id="Q10_5" value="5"/><label for="Q10_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- Q11 -->
+        <div class="likert-question" id="qcard_Q11">
+          <div class="q-meta">
+            <div class="q-number">11</div>
+            <div class="q-text">The way the faculty on this platform communicate makes me feel they are genuinely invested in my progress.<span class="q-variable">bt_trust</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q11">
+            <div class="likert-option"><input type="radio" name="Q11" id="Q11_1" value="1"/><label for="Q11_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q11" id="Q11_2" value="2"/><label for="Q11_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q11" id="Q11_3" value="3"/><label for="Q11_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q11" id="Q11_4" value="4"/><label for="Q11_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q11" id="Q11_5" value="5"/><label for="Q11_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- VARIABLE: sat_eval -->
+        <div class="variable-divider"><span>Satisfaction Evaluation (sat_eval)</span></div>
+
+        <!-- Q12 -->
+        <div class="likert-question" id="qcard_Q12">
+          <div class="q-meta">
+            <div class="q-number">12</div>
+            <div class="q-text">Overall, my experience on this platform has met or exceeded the expectations I had before I enrolled.<span class="q-variable">sat_eval</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q12">
+            <div class="likert-option"><input type="radio" name="Q12" id="Q12_1" value="1"/><label for="Q12_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q12" id="Q12_2" value="2"/><label for="Q12_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q12" id="Q12_3" value="3"/><label for="Q12_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q12" id="Q12_4" value="4"/><label for="Q12_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q12" id="Q12_5" value="5"/><label for="Q12_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- Q13 -->
+        <div class="likert-question" id="qcard_Q13">
+          <div class="q-meta">
+            <div class="q-number">13</div>
+            <div class="q-text">The standard of teaching I received on this platform was exactly what it led me to expect during the free trial or sign-up phase.<span class="q-variable">sat_eval</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q13">
+            <div class="likert-option"><input type="radio" name="Q13" id="Q13_1" value="1"/><label for="Q13_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q13" id="Q13_2" value="2"/><label for="Q13_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q13" id="Q13_3" value="3"/><label for="Q13_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q13" id="Q13_4" value="4"/><label for="Q13_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q13" id="Q13_5" value="5"/><label for="Q13_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- Q14 -->
+        <div class="likert-question" id="qcard_Q14">
+          <div class="q-meta">
+            <div class="q-number">14</div>
+            <div class="q-text">Looking back, enrolling on this platform was a better decision than any of the other alternatives I had considered.<span class="q-variable">sat_eval</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q14">
+            <div class="likert-option"><input type="radio" name="Q14" id="Q14_1" value="1"/><label for="Q14_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q14" id="Q14_2" value="2"/><label for="Q14_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q14" id="Q14_3" value="3"/><label for="Q14_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q14" id="Q14_4" value="4"/><label for="Q14_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q14" id="Q14_5" value="5"/><label for="Q14_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- VARIABLE: ca_advocacy -->
+        <div class="variable-divider"><span>Consumer Advocacy (ca_advocacy)</span></div>
+
+        <!-- Q15 -->
+        <div class="likert-question" id="qcard_Q15">
+          <div class="q-meta">
+            <div class="q-number">15</div>
+            <div class="q-text">When the topic of online learning comes up in conversation, I naturally speak positively about this platform without being prompted.<span class="q-variable">ca_advocacy</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q15">
+            <div class="likert-option"><input type="radio" name="Q15" id="Q15_1" value="1"/><label for="Q15_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q15" id="Q15_2" value="2"/><label for="Q15_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q15" id="Q15_3" value="3"/><label for="Q15_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q15" id="Q15_4" value="4"/><label for="Q15_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q15" id="Q15_5" value="5"/><label for="Q15_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- Q17 (Q16 intentionally absent in original instrument) -->
+        <div class="likert-question" id="qcard_Q17">
+          <div class="q-meta">
+            <div class="q-number">17</div>
+            <div class="q-text">I have proactively encouraged at least one specific person in my network to start using this platform.<span class="q-variable">ca_advocacy</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q17">
+            <div class="likert-option"><input type="radio" name="Q17" id="Q17_1" value="1"/><label for="Q17_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q17" id="Q17_2" value="2"/><label for="Q17_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q17" id="Q17_3" value="3"/><label for="Q17_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q17" id="Q17_4" value="4"/><label for="Q17_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q17" id="Q17_5" value="5"/><label for="Q17_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- Q18 -->
+        <div class="likert-question" id="qcard_Q18">
+          <div class="q-meta">
+            <div class="q-number">18</div>
+            <div class="q-text">If a peer questions or dismisses the value of this platform, I would counter their view by sharing my own experience.<span class="q-variable">ca_advocacy</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q18">
+            <div class="likert-option"><input type="radio" name="Q18" id="Q18_1" value="1"/><label for="Q18_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q18" id="Q18_2" value="2"/><label for="Q18_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q18" id="Q18_3" value="3"/><label for="Q18_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q18" id="Q18_4" value="4"/><label for="Q18_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q18" id="Q18_5" value="5"/><label for="Q18_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- Q19 -->
+        <div class="likert-question" id="qcard_Q19">
+          <div class="q-meta">
+            <div class="q-number">19</div>
+            <div class="q-text">I actively share content, reviews, or updates related to this platform on social media or online study communities.<span class="q-variable">ca_advocacy</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q19">
+            <div class="likert-option"><input type="radio" name="Q19" id="Q19_1" value="1"/><label for="Q19_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q19" id="Q19_2" value="2"/><label for="Q19_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q19" id="Q19_3" value="3"/><label for="Q19_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q19" id="Q19_4" value="4"/><label for="Q19_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q19" id="Q19_5" value="5"/><label for="Q19_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <!-- Q20 -->
+        <div class="likert-question" id="qcard_Q20">
+          <div class="q-meta">
+            <div class="q-number">20</div>
+            <div class="q-text">I plan to continue using or re-enrol on this platform for my next learning milestone in the coming months.<span class="q-variable">ca_advocacy</span></div>
+          </div>
+          <div class="likert-scale" id="scale_Q20">
+            <div class="likert-option"><input type="radio" name="Q20" id="Q20_1" value="1"/><label for="Q20_1"><span class="scale-num">1</span><span class="scale-tiny">Strongly<br>Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q20" id="Q20_2" value="2"/><label for="Q20_2"><span class="scale-num">2</span><span class="scale-tiny">Disagree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q20" id="Q20_3" value="3"/><label for="Q20_3"><span class="scale-num">3</span><span class="scale-tiny">Neutral</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q20" id="Q20_4" value="4"/><label for="Q20_4"><span class="scale-num">4</span><span class="scale-tiny">Agree</span></label></div>
+            <div class="likert-option"><input type="radio" name="Q20" id="Q20_5" value="5"/><label for="Q20_5"><span class="scale-num">5</span><span class="scale-tiny">Strongly<br>Agree</span></label></div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="goBack('section-2','section-screener')">← Back</button>
+          <button class="btn btn-primary" id="submitBtn" onclick="submitSurvey()">
+            <span id="submitLabel">Submit Survey</span>
+            <div class="spinner" id="submitSpinner"></div>
+            <svg id="submitIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="form-footer">
-    IIT Mandi · MBA Research Survey · 2025<br>
-    Responses are anonymous and used only for academic purposes.
+  <!-- ── SUCCESS ── -->
+  <div class="section" id="section-success">
+    <div class="success-card">
+      <div class="success-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="success-title">Thank You for Participating!</div>
+      <p class="success-msg">Your responses have been recorded successfully. Your input is invaluable to this research on learner satisfaction and advocacy in EdTech. We appreciate the time you've taken to share your experience.</p>
+    </div>
   </div>
 
-</div><!-- /formWrapper -->
+</div><!-- end survey-body -->
+
+<!-- ── TOAST ── -->
+<div class="toast" id="toast"></div>
 
 <script>
-  // ════════════════════════════════════════════════════
-  //  ► PASTE YOUR GAS WEB APP URL BELOW (Step 1)
-  // ════════════════════════════════════════════════════
-  var GAS_URL = "PASTE_YOUR_GAS_WEB_APP_URL_HERE";
+  // ═══════════════════════════════════════════
+  //  CONFIGURATION — paste your Apps Script URL
+  // ═══════════════════════════════════════════
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxNaBBa60YU5LDWK42wwXpGKbe51DvIDz5VUZ8eWDnm1UhilSwSzCY3LUlTfltt4ZDU/exec';
 
-  // ─────────────────────────────────────────────────────
-  var YES_SECTIONS = ['sectionB','sectionC','sectionD','sectionE',
-                      'sectionF','sectionG','sectionH','sectionI','submitCard'];
+  // ── Progress state ──
+  const TOTAL_STEPS = 3;
+  let currentStep = 1;
 
-  function el(id)      { return document.getElementById(id); }
-  function radio(name) { var r = document.querySelector('input[name="'+name+'"]:checked'); return r ? r.value : null; }
-  function show(id)    { var e=el(id); if(e) e.classList.add('visible'); }
-  function hide(id)    { var e=el(id); if(e) e.classList.remove('visible'); }
-  function progress(p) { el('progressBar').style.width = p + '%'; }
+  function setProgress(step, label) {
+    const pct = Math.round(((step - 1) / TOTAL_STEPS) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = pct + '%';
+    document.getElementById('progressLabel').textContent = label;
+  }
 
-  // Branching
-  function handleBranch(answer) {
-    hide('err-paid');
-    if (answer === 'Yes') {
-      el('thank-you-no').style.display = 'none';
-      YES_SECTIONS.forEach(function(id){ el(id).classList.remove('hidden'); });
-      progress(50);
+  // ── Section navigation ──
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById(id);
+    el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function goBack(currentId, targetId) {
+    showSection(targetId);
+    if (targetId === 'section-1') setProgress(1, 'Section 1 of 3 — Demographics');
+    if (targetId === 'section-screener') setProgress(2, 'Eligibility Check');
+  }
+
+  // ── Field validation helpers ──
+  function validateTextField(id, errId) {
+    const el = document.getElementById(id);
+    const err = document.getElementById(errId);
+    if (!el.value.trim()) {
+      el.classList.add('invalid'); err.classList.add('visible'); return false;
+    }
+    el.classList.remove('invalid'); err.classList.remove('visible'); return true;
+  }
+
+  function validateSelectField(id, errId) {
+    const el = document.getElementById(id);
+    const err = document.getElementById(errId);
+    if (!el.value) {
+      el.classList.add('invalid'); err.classList.add('visible'); return false;
+    }
+    el.classList.remove('invalid'); err.classList.remove('visible'); return true;
+  }
+
+  function validateNumber(id, errId, min, max) {
+    const el = document.getElementById(id);
+    const err = document.getElementById(errId);
+    const val = parseInt(el.value);
+    if (!el.value.trim() || isNaN(val) || val < min || val > max) {
+      el.classList.add('invalid'); err.classList.add('visible'); return false;
+    }
+    el.classList.remove('invalid'); err.classList.remove('visible'); return true;
+  }
+
+  // ── Section 1 submit ──
+  function submitSection1() {
+    let valid = true;
+    valid = validateTextField('f_name', 'err_name') && valid;
+    valid = validateNumber('f_age', 'err_age', 10, 100) && valid;
+    valid = validateSelectField('f_gender', 'err_gender') && valid;
+    valid = validateSelectField('f_edu', 'err_edu') && valid;
+    valid = validateSelectField('f_platform', 'err_platform') && valid;
+    valid = validateSelectField('f_duration', 'err_duration') && valid;
+    if (!valid) { showToast('Please complete all required fields.', true); return; }
+    setProgress(2, 'Eligibility Check');
+    showSection('section-screener');
+  }
+
+  // ── Screener submit ──
+  function submitScreener() {
+    const sel = document.querySelector('input[name="paid"]:checked');
+    const err = document.getElementById('err_paid');
+    if (!sel) { err.classList.add('visible'); showToast('Please select an option.', true); return; }
+    err.classList.remove('visible');
+    if (sel.value === 'No') {
+      document.getElementById('screener-no').classList.add('visible');
+      document.getElementById('screener-btn-row').style.display = 'none';
+      setProgress(3, 'Survey Complete');
     } else {
-      YES_SECTIONS.forEach(function(id){ el(id).classList.add('hidden'); });
-      el('thank-you-no').style.display = 'block';
-      progress(80);
-      el('thank-you-no').scrollIntoView({ behavior:'smooth' });
+      setProgress(3, 'Section 2 of 3 — Perception Scale');
+      showSection('section-2');
     }
   }
 
-  // Validation
-  function validate() {
-    var ok = true, first = null;
-    function chk(fail, errId, inputId) {
-      if (fail) {
-        show(errId);
-        if (inputId) el(inputId).classList.add('error');
-        ok = false;
-        if (!first) first = errId;
+  // ── Likert validation ──
+  const LIKERT_QUESTIONS = ['Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8','Q9','Q10','Q11','Q12','Q13','Q14','Q15','Q17','Q18','Q19','Q20'];
+
+  function validateLikert() {
+    let allValid = true;
+    LIKERT_QUESTIONS.forEach(q => {
+      const sel = document.querySelector(`input[name="${q}"]:checked`);
+      const card = document.getElementById('qcard_' + q);
+      if (!sel) {
+        card.classList.add('error-q');
+        card.classList.remove('answered');
+        allValid = false;
       } else {
-        hide(errId);
-        if (inputId) el(inputId).classList.remove('error');
+        card.classList.remove('error-q');
+        card.classList.add('answered');
       }
-    }
-
-    chk(!el('name').value.trim(), 'err-name', 'name');
-    var age = parseInt(el('age').value, 10);
-    chk(isNaN(age)||age<15||age>80, 'err-age', 'age');
-    chk(!radio('gender'),    'err-gender',    null);
-    chk(!radio('education'), 'err-education', null);
-    chk(!radio('platform'),  'err-platform',  null);
-    chk(!radio('duration'),  'err-duration',  null);
-
-    var paid = radio('paid_courses');
-    chk(!paid, 'err-paid', null);
-
-    if (paid === 'Yes') {
-      var groups = {
-        sectionB: ['sq_rel_1','sq_rel_2','sq_rel_3','sq_rel_4'],
-        sectionC: ['ft_exp_1','ft_cred_2','ft_con_3'],
-        sectionD: ['hrc_hon_1','hrc_rev_2'],
-        sectionE: ['pv_fee_1','pv_free_2'],
-        sectionF: ['fsc_con_1','fsc_rec_2'],
-        sectionG: ['ib_int_1','ib_par_2','ib_bel_3'],
-        sectionH: ['os_sat_1','os_met_2','os_dec_3'],
-        sectionI: ['ca_rec_1','ca_pos_2','ca_def_3','ca_sha_4','ca_int_5']
-      };
-      for (var sec in groups) {
-        chk(!groups[sec].every(function(q){ return !!radio(q); }), 'err-'+sec, null);
-      }
-    }
-
-    if (first) el(first).scrollIntoView({ behavior:'smooth', block:'center' });
-    return ok;
-  }
-
-  // Collect all answers into one object
-  function collect() {
-    var paid = radio('paid_courses');
-    var d = {
-      name: el('name').value.trim(), age: el('age').value,
-      gender: radio('gender'), education: radio('education'),
-      platform: radio('platform'), duration: radio('duration'),
-      paid_courses: paid
-    };
-    if (paid === 'Yes') {
-      ['sq_rel_1','sq_rel_2','sq_rel_3','sq_rel_4',
-       'ft_exp_1','ft_cred_2','ft_con_3',
-       'hrc_hon_1','hrc_rev_2',
-       'pv_fee_1','pv_free_2',
-       'fsc_con_1','fsc_rec_2',
-       'ib_int_1','ib_par_2','ib_bel_3',
-       'os_sat_1','os_met_2','os_dec_3',
-       'ca_rec_1','ca_pos_2','ca_def_3','ca_sha_4','ca_int_5'
-      ].forEach(function(f){ d[f] = radio(f); });
-    }
-    return d;
-  }
-
-  // Submit via fetch → GAS
-  function submitSurvey() {
-    if (!validate()) return;
-    var paid  = radio('paid_courses');
-    var btnId = paid === 'Yes' ? 'btn-yes' : 'btn-no';
-    var spnId = paid === 'Yes' ? 'spin-yes' : 'spin-no';
-
-    el(btnId).disabled = true;
-    el(spnId).style.display = 'inline-block';
-    progress(90);
-
-    // no-cors is required for cross-origin GAS calls from GitHub Pages.
-    // The request is received by GAS even though the response is opaque.
-    fetch(GAS_URL, {
-      method:  'POST',
-      mode:    'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(collect())
-    })
-    .then(function() {
-      progress(100);
-      // Replace the entire form with the thank-you card
-      el('formWrapper').innerHTML = '<div id="thank-you-final" style="display:block;background:#fff;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.12);padding:56px 24px;text-align:center;"><div style="font-size:4rem;margin-bottom:16px;">✅</div><h2 style="font-family:Google Sans,sans-serif;font-size:1.5rem;color:#188038;margin-bottom:10px;">Response Submitted Successfully!</h2><p style="color:#5F6368;font-size:.92rem;line-height:1.7;">Thank you for your valuable participation in this research on<br><strong>Customer Advocacy in EdTech</strong>.<br><br>Your response has been recorded securely.<br>This study is part of an MBA programme at <strong>IIT Mandi</strong>.</p></div>';
-    })
-    .catch(function(err) {
-      alert('Submission failed. Check your internet connection and try again.\n\n' + err);
-      el(btnId).disabled = false;
-      el(spnId).style.display = 'none';
     });
+    return allValid;
   }
 
-  // Clear form
-  function clearForm() {
-    if (!confirm('Clear all your answers? This cannot be undone.')) return;
-    document.querySelectorAll('input[type="radio"]').forEach(function(r){ r.checked=false; });
-    el('name').value = ''; el('age').value = '';
-    YES_SECTIONS.forEach(function(id){ el(id).classList.add('hidden'); });
-    el('thank-you-no').style.display = 'none';
-    progress(20);
-    document.querySelectorAll('.field-error,.likert-error').forEach(function(e){ e.classList.remove('visible'); });
-    document.querySelectorAll('.gf-input.error').forEach(function(e){ e.classList.remove('error'); });
-    window.scrollTo({ top:0, behavior:'smooth' });
+  // Auto-highlight answered cards
+  LIKERT_QUESTIONS.forEach(q => {
+    document.querySelectorAll(`input[name="${q}"]`).forEach(radio => {
+      radio.addEventListener('change', () => {
+        const card = document.getElementById('qcard_' + q);
+        card.classList.remove('error-q');
+        card.classList.add('answered');
+      });
+    });
+  });
+
+  // ── Collect all data ──
+  function collectData() {
+    const data = {
+      timestamp:  new Date().toISOString(),
+      name:       document.getElementById('f_name').value.trim(),
+      age:        document.getElementById('f_age').value.trim(),
+      gender:     document.getElementById('f_gender').value,
+      education:  document.getElementById('f_edu').value,
+      platform:   document.getElementById('f_platform').value,
+      duration:   document.getElementById('f_duration').value,
+      paid_user:  document.querySelector('input[name="paid"]:checked')?.value || ''
+    };
+    LIKERT_QUESTIONS.forEach(q => {
+      data[q] = document.querySelector(`input[name="${q}"]:checked`)?.value || '';
+    });
+    return data;
   }
+
+  // ── Final submit ──
+  async function submitSurvey() {
+    if (!validateLikert()) {
+      showToast('Please answer all questions before submitting.', true);
+      // Scroll to first unanswered
+      const first = document.querySelector('.likert-question.error-q');
+      if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    const btn = document.getElementById('submitBtn');
+    const label = document.getElementById('submitLabel');
+    const spinner = document.getElementById('submitSpinner');
+    const icon = document.getElementById('submitIcon');
+
+    btn.disabled = true;
+    label.textContent = 'Submitting…';
+    spinner.classList.add('active');
+    icon.style.display = 'none';
+
+    const payload = collectData();
+
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode:   'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      setProgress(4, 'Survey Complete — Thank You!');
+      document.getElementById('progressFill').style.width = '100%';
+      document.getElementById('progressPct').textContent = '100%';
+      showSection('section-success');
+    } catch (err) {
+      btn.disabled = false;
+      label.textContent = 'Submit Survey';
+      spinner.classList.remove('active');
+      icon.style.display = '';
+      showToast('Submission failed. Please check your connection and try again.', true);
+    }
+  }
+
+  // ── Toast ──
+  let toastTimer;
+  function showToast(msg, isError = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast' + (isError ? ' error' : '') + ' show';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { t.classList.remove('show'); }, 3500);
+  }
+
+  // ── Init ──
+  setProgress(1, 'Section 1 of 3 — Demographics');
 </script>
 </body>
 </html>
