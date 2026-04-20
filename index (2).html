@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Advocacy in EdTech — Survey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gf-purple:       #673AB7;
+      --gf-purple-light: #EDE7F6;
+      --gf-surface:      #FFFFFF;
+      --gf-bg:           #F0EBF8;
+      --gf-border:       #DADCE0;
+      --gf-text:         #202124;
+      --gf-muted:        #5F6368;
+      --gf-error:        #D93025;
+      --gf-success:      #188038;
+      --gf-header-bar:   #7B1FA2;
+      --radius:          8px;
+      --shadow:          0 2px 6px rgba(0,0,0,.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--gf-bg);
+      color: var(--gf-text);
+      min-height: 100vh;
+      padding: 24px 16px 60px;
+    }
+
+    .form-wrapper { max-width: 680px; margin: 0 auto; }
+
+    .header-card {
+      background: var(--gf-surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 12px;
+      border-top: 10px solid var(--gf-header-bar);
+    }
+    .header-card-body { padding: 24px 24px 20px; }
+    .header-card h1 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .header-card .subtitle { font-size: 0.85rem; color: var(--gf-muted); line-height: 1.6; }
+    .required-note { font-size: 0.78rem; color: var(--gf-muted); margin-top: 10px; }
+    .required-note span { color: var(--gf-error); }
+
+    .progress-bar-wrap { height: 5px; background: var(--gf-border); border-radius: 3px; margin-bottom: 18px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: var(--gf-purple); border-radius: 3px; transition: width .4s ease; width: 20%; }
+
+    .section-card { background: var(--gf-surface); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 12px; padding: 24px; }
+    .section-title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gf-purple);
+      border-bottom: 2px solid var(--gf-purple-light);
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+
+    .question-block { margin-bottom: 22px; }
+    .question-block:last-child { margin-bottom: 0; }
+    .q-label { font-size: 0.92rem; font-weight: 500; margin-bottom: 10px; line-height: 1.5; }
+    .q-label .req { color: var(--gf-error); margin-left: 2px; }
+
+    .gf-input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid var(--gf-border);
+      padding: 6px 2px;
+      font-size: 0.92rem;
+      font-family: 'Roboto', sans-serif;
+      background: transparent;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .gf-input:focus { border-bottom: 2px solid var(--gf-purple); }
+    .gf-input.error { border-bottom: 2px solid var(--gf-error); }
+
+    .radio-group { display: flex; flex-direction: column; gap: 10px; }
+    .radio-option { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.9rem; }
+    .radio-option input[type="radio"] { accent-color: var(--gf-purple); width: 16px; height: 16px; flex-shrink: 0; cursor: pointer; }
+
+    .screener-card { background: var(--gf-surface); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 12px; padding: 24px; border-left: 4px solid var(--gf-purple); }
+
+    .scale-hint { font-size: 0.8rem; color: var(--gf-muted); margin-bottom: 14px; }
+
+    .likert-wrapper { overflow-x: auto; }
+    .likert-table { width: 100%; border-collapse: collapse; min-width: 380px; font-size: 0.82rem; }
+    .likert-table thead th { text-align: center; padding: 6px 4px; color: var(--gf-muted); font-weight: 500; white-space: nowrap; }
+    .likert-table thead th:first-child { text-align: left; }
+    .likert-table tbody tr { border-bottom: 1px solid var(--gf-border); }
+    .likert-table tbody tr:last-child { border-bottom: none; }
+    .likert-table tbody tr:hover { background: var(--gf-purple-light); }
+    .likert-table td { padding: 10px 4px; vertical-align: middle; }
+    .likert-table td.q-text { text-align: left; font-size: 0.85rem; line-height: 1.45; padding-right: 12px; min-width: 180px; }
+    .likert-table td.radio-cell { text-align: center; }
+    .likert-table td.radio-cell input[type="radio"] { accent-color: var(--gf-purple); width: 17px; height: 17px; cursor: pointer; }
+    .likert-table col.col-q   { width: 45%; }
+    .likert-table col.col-num { width: 11%; }
+
+    .field-error, .likert-error { color: var(--gf-error); font-size: 0.78rem; margin-top: 5px; display: none; }
+    .field-error.visible, .likert-error.visible { display: block; }
+
+    #thank-you-no { display: none; background: var(--gf-surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 24px; text-align: center; margin-bottom: 12px; }
+    #thank-you-no .ty-icon { font-size: 3rem; margin-bottom: 12px; }
+    #thank-you-no h2 { font-family: 'Google Sans', sans-serif; font-size: 1.3rem; margin-bottom: 8px; }
+    #thank-you-no p { color: var(--gf-muted); font-size: 0.9rem; line-height: 1.6; }
+
+    #thank-you-final { display: none; background: var(--gf-surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 56px 24px; text-align: center; }
+    #thank-you-final .ty-icon { font-size: 4rem; margin-bottom: 16px; }
+    #thank-you-final h2 { font-family: 'Google Sans', sans-serif; font-size: 1.5rem; color: var(--gf-success); margin-bottom: 10px; }
+    #thank-you-final p { color: var(--gf-muted); font-size: 0.92rem; line-height: 1.7; }
+
+    .btn-row { display: flex; align-items: center; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+    .btn-submit { background: var(--gf-purple); color: #fff; border: none; padding: 10px 28px; border-radius: 4px; font-size: 0.9rem; font-family: 'Google Sans', sans-serif; font-weight: 500; cursor: pointer; transition: background .2s; }
+    .btn-submit:hover { background: #5e35b1; }
+    .btn-submit:disabled { background: var(--gf-muted); cursor: not-allowed; }
+    .btn-clear { background: transparent; border: none; color: var(--gf-purple); font-size: 0.88rem; cursor: pointer; padding: 8px 4px; }
+    .btn-clear:hover { text-decoration: underline; }
+
+    .spinner { display: none; width: 15px; height: 15px; border: 2px solid rgba(255,255,255,.5); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; vertical-align: middle; margin-right: 6px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .hidden { display: none !important; }
+
+    .form-footer { text-align: center; color: var(--gf-muted); font-size: 0.75rem; margin-top: 24px; line-height: 1.8; }
+
+    @media (max-width: 480px) {
+      .header-card h1 { font-size: 1.3rem; }
+      .likert-table { font-size: 0.76rem; }
+      .likert-table td.q-text { min-width: 120px; }
+    }
+  </style>
+</head>
+<body>
+<div class="form-wrapper" id="formWrapper">
+
+  <div class="header-card">
+    <div class="header-card-body">
+      <h1>Customer Advocacy in EdTech</h1>
+      <p class="subtitle">
+        This survey is part of an MBA research project at <strong>IIT Mandi</strong>.
+        It examines factors influencing customer advocacy among EdTech platform users in India.
+        Participation is voluntary and all responses are strictly confidential.
+        <br><br>Estimated time: <strong>5–8 minutes</strong>
+      </p>
+      <p class="required-note"><span>*</span> Required question</p>
+    </div>
+  </div>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progressBar"></div>
+  </div>
+
+  <!-- ── SECTION A ── -->
+  <div class="section-card">
+    <div class="section-title">👤 Section A — Respondent Profile</div>
+
+    <div class="question-block">
+      <div class="q-label">What is your name? <span class="req">*</span></div>
+      <input class="gf-input" type="text" id="name" placeholder="Your full name" autocomplete="name" />
+      <div class="field-error" id="err-name">Please enter your name.</div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-label">What is your age? <span class="req">*</span></div>
+      <input class="gf-input" type="number" id="age" placeholder="e.g. 22" min="15" max="80" />
+      <div class="field-error" id="err-age">Please enter a valid numeric age (15–80).</div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-label">What is your gender? <span class="req">*</span></div>
+      <div class="radio-group">
+        <label class="radio-option"><input type="radio" name="gender" value="Male" /><span>Male</span></label>
+        <label class="radio-option"><input type="radio" name="gender" value="Female" /><span>Female</span></label>
+        <label class="radio-option"><input type="radio" name="gender" value="Prefer not to say" /><span>Prefer not to say</span></label>
+      </div>
+      <div class="field-error" id="err-gender">Please select your gender.</div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-label">What is your current education level? <span class="req">*</span></div>
+      <div class="radio-group">
+        <label class="radio-option"><input type="radio" name="education" value="Undergraduate" /><span>Undergraduate</span></label>
+        <label class="radio-option"><input type="radio" name="education" value="Postgraduate" /><span>Postgraduate</span></label>
+        <label class="radio-option"><input type="radio" name="education" value="Professional course" /><span>Professional course</span></label>
+        <label class="radio-option"><input type="radio" name="education" value="Other" /><span>Other</span></label>
+      </div>
+      <div class="field-error" id="err-education">Please select your education level.</div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-label">Which EdTech platform do you use the most? <span class="req">*</span></div>
+      <div class="radio-group">
+        <label class="radio-option"><input type="radio" name="platform" value="YouTube" /><span>YouTube</span></label>
+        <label class="radio-option"><input type="radio" name="platform" value="Unacademy" /><span>Unacademy</span></label>
+        <label class="radio-option"><input type="radio" name="platform" value="BYJU'S" /><span>BYJU'S</span></label>
+        <label class="radio-option"><input type="radio" name="platform" value="Physics Wallah" /><span>Physics Wallah</span></label>
+        <label class="radio-option"><input type="radio" name="platform" value="Vedantu" /><span>Vedantu</span></label>
+        <label class="radio-option"><input type="radio" name="platform" value="Udemy" /><span>Udemy</span></label>
+        <label class="radio-option"><input type="radio" name="platform" value="Other" /><span>Other</span></label>
+      </div>
+      <div class="field-error" id="err-platform">Please select a platform.</div>
+    </div>
+
+    <div class="question-block">
+      <div class="q-label">How long have you been using this platform? <span class="req">*</span></div>
+      <div class="radio-group">
+        <label class="radio-option"><input type="radio" name="duration" value="Less than 6 months" /><span>Less than 6 months</span></label>
+        <label class="radio-option"><input type="radio" name="duration" value="6–12 months" /><span>6–12 months</span></label>
+        <label class="radio-option"><input type="radio" name="duration" value="1–2 years" /><span>1–2 years</span></label>
+        <label class="radio-option"><input type="radio" name="duration" value="More than 2 years" /><span>More than 2 years</span></label>
+      </div>
+      <div class="field-error" id="err-duration">Please select duration of use.</div>
+    </div>
+  </div>
+
+  <!-- ── SCREENER ── -->
+  <div class="screener-card">
+    <div class="q-label" style="font-size:1rem;">Have you used paid courses on any EdTech platform? <span class="req">*</span></div>
+    <div class="radio-group" style="flex-direction:row; gap:24px; margin-top:12px;">
+      <label class="radio-option"><input type="radio" name="paid_courses" value="Yes" onchange="handleBranch('Yes')" /><span>Yes</span></label>
+      <label class="radio-option"><input type="radio" name="paid_courses" value="No"  onchange="handleBranch('No')"  /><span>No</span></label>
+    </div>
+    <div class="field-error" id="err-paid">Please answer this question.</div>
+  </div>
+
+  <!-- ── THANK YOU (No branch) ── -->
+  <div id="thank-you-no">
+    <div class="ty-icon">🙏</div>
+    <h2>Thank you for your response!</h2>
+    <p>Since you haven't used paid EdTech courses, the remaining questions are not applicable.<br>
+    Please click <strong>Submit</strong> to record your response.</p>
+    <div class="btn-row" style="justify-content:center; margin-top:20px;">
+      <button class="btn-submit" id="btn-no" onclick="submitSurvey()">
+        <span class="spinner" id="spin-no"></span>Submit Response
+      </button>
+    </div>
+  </div>
+
+  <!-- ── SECTION B ── -->
+  <div class="section-card hidden" id="sectionB">
+    <div class="section-title">📚 Section B — Service Quality &amp; Content Relevance</div>
+    <p class="scale-hint">1 = Strongly Disagree &nbsp;|&nbsp; 3 = Neutral &nbsp;|&nbsp; 5 = Strongly Agree</p>
+    <div class="likert-wrapper">
+      <table class="likert-table">
+        <colgroup><col class="col-q"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/></colgroup>
+        <thead><tr><th></th><th>SD<br>1</th><th>2</th><th>3</th><th>4</th><th>SA<br>5</th></tr></thead>
+        <tbody>
+          <tr><td class="q-text">The content on my preferred EdTech platform is relevant to my learning goals.</td><td class="radio-cell"><input type="radio" name="sq_rel_1" value="1"/></td><td class="radio-cell"><input type="radio" name="sq_rel_1" value="2"/></td><td class="radio-cell"><input type="radio" name="sq_rel_1" value="3"/></td><td class="radio-cell"><input type="radio" name="sq_rel_1" value="4"/></td><td class="radio-cell"><input type="radio" name="sq_rel_1" value="5"/></td></tr>
+          <tr><td class="q-text">The teaching on this platform helps me genuinely understand concepts, not just memorize.</td><td class="radio-cell"><input type="radio" name="sq_rel_2" value="1"/></td><td class="radio-cell"><input type="radio" name="sq_rel_2" value="2"/></td><td class="radio-cell"><input type="radio" name="sq_rel_2" value="3"/></td><td class="radio-cell"><input type="radio" name="sq_rel_2" value="4"/></td><td class="radio-cell"><input type="radio" name="sq_rel_2" value="5"/></td></tr>
+          <tr><td class="q-text">The course content is well-aligned with the examinations or outcomes I am preparing for.</td><td class="radio-cell"><input type="radio" name="sq_rel_3" value="1"/></td><td class="radio-cell"><input type="radio" name="sq_rel_3" value="2"/></td><td class="radio-cell"><input type="radio" name="sq_rel_3" value="3"/></td><td class="radio-cell"><input type="radio" name="sq_rel_3" value="4"/></td><td class="radio-cell"><input type="radio" name="sq_rel_3" value="5"/></td></tr>
+          <tr><td class="q-text">I watch free videos (e.g., on YouTube) to evaluate a platform's content quality before purchasing.</td><td class="radio-cell"><input type="radio" name="sq_rel_4" value="1"/></td><td class="radio-cell"><input type="radio" name="sq_rel_4" value="2"/></td><td class="radio-cell"><input type="radio" name="sq_rel_4" value="3"/></td><td class="radio-cell"><input type="radio" name="sq_rel_4" value="4"/></td><td class="radio-cell"><input type="radio" name="sq_rel_4" value="5"/></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="likert-error" id="err-sectionB">Please answer all questions in this section.</div>
+  </div>
+
+  <!-- ── SECTION C ── -->
+  <div class="section-card hidden" id="sectionC">
+    <div class="section-title">🎓 Section C — Faculty Trust &amp; Consistency</div>
+    <p class="scale-hint">1 = Strongly Disagree &nbsp;|&nbsp; 3 = Neutral &nbsp;|&nbsp; 5 = Strongly Agree</p>
+    <div class="likert-wrapper">
+      <table class="likert-table">
+        <colgroup><col class="col-q"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/></colgroup>
+        <thead><tr><th></th><th>SD<br>1</th><th>2</th><th>3</th><th>4</th><th>SA<br>5</th></tr></thead>
+        <tbody>
+          <tr><td class="q-text">The instructors on this platform demonstrate a high level of expertise in their subject matter.</td><td class="radio-cell"><input type="radio" name="ft_exp_1" value="1"/></td><td class="radio-cell"><input type="radio" name="ft_exp_1" value="2"/></td><td class="radio-cell"><input type="radio" name="ft_exp_1" value="3"/></td><td class="radio-cell"><input type="radio" name="ft_exp_1" value="4"/></td><td class="radio-cell"><input type="radio" name="ft_exp_1" value="5"/></td></tr>
+          <tr><td class="q-text">The reputation and academic credentials of the faculty were a primary factor in my decision to use this platform.</td><td class="radio-cell"><input type="radio" name="ft_cred_2" value="1"/></td><td class="radio-cell"><input type="radio" name="ft_cred_2" value="2"/></td><td class="radio-cell"><input type="radio" name="ft_cred_2" value="3"/></td><td class="radio-cell"><input type="radio" name="ft_cred_2" value="4"/></td><td class="radio-cell"><input type="radio" name="ft_cred_2" value="5"/></td></tr>
+          <tr><td class="q-text">The quality of teaching remains consistently high throughout all the modules and lectures provided.</td><td class="radio-cell"><input type="radio" name="ft_con_3" value="1"/></td><td class="radio-cell"><input type="radio" name="ft_con_3" value="2"/></td><td class="radio-cell"><input type="radio" name="ft_con_3" value="3"/></td><td class="radio-cell"><input type="radio" name="ft_con_3" value="4"/></td><td class="radio-cell"><input type="radio" name="ft_con_3" value="5"/></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="likert-error" id="err-sectionC">Please answer all questions in this section.</div>
+  </div>
+
+  <!-- ── SECTION D ── -->
+  <div class="section-card hidden" id="sectionD">
+    <div class="section-title">🔍 Section D — Honesty &amp; Review Credibility</div>
+    <p class="scale-hint">1 = Strongly Disagree &nbsp;|&nbsp; 3 = Neutral &nbsp;|&nbsp; 5 = Strongly Agree</p>
+    <div class="likert-wrapper">
+      <table class="likert-table">
+        <colgroup><col class="col-q"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/></colgroup>
+        <thead><tr><th></th><th>SD<br>1</th><th>2</th><th>3</th><th>4</th><th>SA<br>5</th></tr></thead>
+        <tbody>
+          <tr><td class="q-text">I believe this platform is honest in its marketing and success claims.</td><td class="radio-cell"><input type="radio" name="hrc_hon_1" value="1"/></td><td class="radio-cell"><input type="radio" name="hrc_hon_1" value="2"/></td><td class="radio-cell"><input type="radio" name="hrc_hon_1" value="3"/></td><td class="radio-cell"><input type="radio" name="hrc_hon_1" value="4"/></td><td class="radio-cell"><input type="radio" name="hrc_hon_1" value="5"/></td></tr>
+          <tr><td class="q-text">I find the online reviews and ratings of EdTech platforms to be generally trustworthy.</td><td class="radio-cell"><input type="radio" name="hrc_rev_2" value="1"/></td><td class="radio-cell"><input type="radio" name="hrc_rev_2" value="2"/></td><td class="radio-cell"><input type="radio" name="hrc_rev_2" value="3"/></td><td class="radio-cell"><input type="radio" name="hrc_rev_2" value="4"/></td><td class="radio-cell"><input type="radio" name="hrc_rev_2" value="5"/></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="likert-error" id="err-sectionD">Please answer all questions in this section.</div>
+  </div>
+
+  <!-- ── SECTION E ── -->
+  <div class="section-card hidden" id="sectionE">
+    <div class="section-title">💰 Section E — Price &amp; Value Perception</div>
+    <p class="scale-hint">1 = Strongly Disagree &nbsp;|&nbsp; 3 = Neutral &nbsp;|&nbsp; 5 = Strongly Agree</p>
+    <div class="likert-wrapper">
+      <table class="likert-table">
+        <colgroup><col class="col-q"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/></colgroup>
+        <thead><tr><th></th><th>SD<br>1</th><th>2</th><th>3</th><th>4</th><th>SA<br>5</th></tr></thead>
+        <tbody>
+          <tr><td class="q-text">The fees charged by my preferred EdTech platform are reasonable for the quality provided.</td><td class="radio-cell"><input type="radio" name="pv_fee_1" value="1"/></td><td class="radio-cell"><input type="radio" name="pv_fee_1" value="2"/></td><td class="radio-cell"><input type="radio" name="pv_fee_1" value="3"/></td><td class="radio-cell"><input type="radio" name="pv_fee_1" value="4"/></td><td class="radio-cell"><input type="radio" name="pv_fee_1" value="5"/></td></tr>
+          <tr><td class="q-text">I prefer to first use free content (e.g., YouTube) before investing in paid courses.</td><td class="radio-cell"><input type="radio" name="pv_free_2" value="1"/></td><td class="radio-cell"><input type="radio" name="pv_free_2" value="2"/></td><td class="radio-cell"><input type="radio" name="pv_free_2" value="3"/></td><td class="radio-cell"><input type="radio" name="pv_free_2" value="4"/></td><td class="radio-cell"><input type="radio" name="pv_free_2" value="5"/></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="likert-error" id="err-sectionE">Please answer all questions in this section.</div>
+  </div>
+
+  <!-- ── SECTION F ── -->
+  <div class="section-card hidden" id="sectionF">
+    <div class="section-title">🤝 Section F — Faculty–Student Connection</div>
+    <p class="scale-hint">1 = Strongly Disagree &nbsp;|&nbsp; 3 = Neutral &nbsp;|&nbsp; 5 = Strongly Agree</p>
+    <div class="likert-wrapper">
+      <table class="likert-table">
+        <colgroup><col class="col-q"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/></colgroup>
+        <thead><tr><th></th><th>SD<br>1</th><th>2</th><th>3</th><th>4</th><th>SA<br>5</th></tr></thead>
+        <tbody>
+          <tr><td class="q-text">I feel a personal connection with the faculty on my preferred EdTech platform.</td><td class="radio-cell"><input type="radio" name="fsc_con_1" value="1"/></td><td class="radio-cell"><input type="radio" name="fsc_con_1" value="2"/></td><td class="radio-cell"><input type="radio" name="fsc_con_1" value="3"/></td><td class="radio-cell"><input type="radio" name="fsc_con_1" value="4"/></td><td class="radio-cell"><input type="radio" name="fsc_con_1" value="5"/></td></tr>
+          <tr><td class="q-text">The faculty on my platform recognize or acknowledge consistent students.</td><td class="radio-cell"><input type="radio" name="fsc_rec_2" value="1"/></td><td class="radio-cell"><input type="radio" name="fsc_rec_2" value="2"/></td><td class="radio-cell"><input type="radio" name="fsc_rec_2" value="3"/></td><td class="radio-cell"><input type="radio" name="fsc_rec_2" value="4"/></td><td class="radio-cell"><input type="radio" name="fsc_rec_2" value="5"/></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="likert-error" id="err-sectionF">Please answer all questions in this section.</div>
+  </div>
+
+  <!-- ── SECTION G ── -->
+  <div class="section-card hidden" id="sectionG">
+    <div class="section-title">💬 Section G — Interaction &amp; Belonging</div>
+    <p class="scale-hint">1 = Strongly Disagree &nbsp;|&nbsp; 3 = Neutral &nbsp;|&nbsp; 5 = Strongly Agree</p>
+    <div class="likert-wrapper">
+      <table class="likert-table">
+        <colgroup><col class="col-q"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/></colgroup>
+        <thead><tr><th></th><th>SD<br>1</th><th>2</th><th>3</th><th>4</th><th>SA<br>5</th></tr></thead>
+        <tbody>
+          <tr><td class="q-text">Two-way interaction (e.g., live video, Q&amp;A) is important for my learning experience.</td><td class="radio-cell"><input type="radio" name="ib_int_1" value="1"/></td><td class="radio-cell"><input type="radio" name="ib_int_1" value="2"/></td><td class="radio-cell"><input type="radio" name="ib_int_1" value="3"/></td><td class="radio-cell"><input type="radio" name="ib_int_1" value="4"/></td><td class="radio-cell"><input type="radio" name="ib_int_1" value="5"/></td></tr>
+          <tr><td class="q-text">I actively participate in discussion forums, chats, or Q&amp;A sections on my EdTech platform.</td><td class="radio-cell"><input type="radio" name="ib_par_2" value="1"/></td><td class="radio-cell"><input type="radio" name="ib_par_2" value="2"/></td><td class="radio-cell"><input type="radio" name="ib_par_2" value="3"/></td><td class="radio-cell"><input type="radio" name="ib_par_2" value="4"/></td><td class="radio-cell"><input type="radio" name="ib_par_2" value="5"/></td></tr>
+          <tr><td class="q-text">I feel a sense of belonging to the community of learners on my preferred platform.</td><td class="radio-cell"><input type="radio" name="ib_bel_3" value="1"/></td><td class="radio-cell"><input type="radio" name="ib_bel_3" value="2"/></td><td class="radio-cell"><input type="radio" name="ib_bel_3" value="3"/></td><td class="radio-cell"><input type="radio" name="ib_bel_3" value="4"/></td><td class="radio-cell"><input type="radio" name="ib_bel_3" value="5"/></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="likert-error" id="err-sectionG">Please answer all questions in this section.</div>
+  </div>
+
+  <!-- ── SECTION H ── -->
+  <div class="section-card hidden" id="sectionH">
+    <div class="section-title">⭐ Section H — Overall Satisfaction &amp; Decision Quality</div>
+    <p class="scale-hint">1 = Strongly Disagree &nbsp;|&nbsp; 3 = Neutral &nbsp;|&nbsp; 5 = Strongly Agree</p>
+    <div class="likert-wrapper">
+      <table class="likert-table">
+        <colgroup><col class="col-q"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/></colgroup>
+        <thead><tr><th></th><th>SD<br>1</th><th>2</th><th>3</th><th>4</th><th>SA<br>5</th></tr></thead>
+        <tbody>
+          <tr><td class="q-text">Overall, my experience with this EdTech platform has been highly satisfactory.</td><td class="radio-cell"><input type="radio" name="os_sat_1" value="1"/></td><td class="radio-cell"><input type="radio" name="os_sat_1" value="2"/></td><td class="radio-cell"><input type="radio" name="os_sat_1" value="3"/></td><td class="radio-cell"><input type="radio" name="os_sat_1" value="4"/></td><td class="radio-cell"><input type="radio" name="os_sat_1" value="5"/></td></tr>
+          <tr><td class="q-text">The platform has successfully met my expectations regarding the quality of learning.</td><td class="radio-cell"><input type="radio" name="os_met_2" value="1"/></td><td class="radio-cell"><input type="radio" name="os_met_2" value="2"/></td><td class="radio-cell"><input type="radio" name="os_met_2" value="3"/></td><td class="radio-cell"><input type="radio" name="os_met_2" value="4"/></td><td class="radio-cell"><input type="radio" name="os_met_2" value="5"/></td></tr>
+          <tr><td class="q-text">I am confident that choosing this platform was the right decision compared to other available options.</td><td class="radio-cell"><input type="radio" name="os_dec_3" value="1"/></td><td class="radio-cell"><input type="radio" name="os_dec_3" value="2"/></td><td class="radio-cell"><input type="radio" name="os_dec_3" value="3"/></td><td class="radio-cell"><input type="radio" name="os_dec_3" value="4"/></td><td class="radio-cell"><input type="radio" name="os_dec_3" value="5"/></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="likert-error" id="err-sectionH">Please answer all questions in this section.</div>
+  </div>
+
+  <!-- ── SECTION I ── -->
+  <div class="section-card hidden" id="sectionI">
+    <div class="section-title">📣 Section I — Word-of-Mouth &amp; Customer Advocacy</div>
+    <p class="scale-hint">1 = Strongly Disagree &nbsp;|&nbsp; 3 = Neutral &nbsp;|&nbsp; 5 = Strongly Agree</p>
+    <div class="likert-wrapper">
+      <table class="likert-table">
+        <colgroup><col class="col-q"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/><col class="col-num"/></colgroup>
+        <thead><tr><th></th><th>SD<br>1</th><th>2</th><th>3</th><th>4</th><th>SA<br>5</th></tr></thead>
+        <tbody>
+          <tr><td class="q-text">I would actively recommend my preferred EdTech platform to friends, family, or classmates.</td><td class="radio-cell"><input type="radio" name="ca_rec_1" value="1"/></td><td class="radio-cell"><input type="radio" name="ca_rec_1" value="2"/></td><td class="radio-cell"><input type="radio" name="ca_rec_1" value="3"/></td><td class="radio-cell"><input type="radio" name="ca_rec_1" value="4"/></td><td class="radio-cell"><input type="radio" name="ca_rec_1" value="5"/></td></tr>
+          <tr><td class="q-text">I frequently speak positively about my preferred EdTech platform in my social circle.</td><td class="radio-cell"><input type="radio" name="ca_pos_2" value="1"/></td><td class="radio-cell"><input type="radio" name="ca_pos_2" value="2"/></td><td class="radio-cell"><input type="radio" name="ca_pos_2" value="3"/></td><td class="radio-cell"><input type="radio" name="ca_pos_2" value="4"/></td><td class="radio-cell"><input type="radio" name="ca_pos_2" value="5"/></td></tr>
+          <tr><td class="q-text">I would defend my preferred EdTech platform if someone criticized it.</td><td class="radio-cell"><input type="radio" name="ca_def_3" value="1"/></td><td class="radio-cell"><input type="radio" name="ca_def_3" value="2"/></td><td class="radio-cell"><input type="radio" name="ca_def_3" value="3"/></td><td class="radio-cell"><input type="radio" name="ca_def_3" value="4"/></td><td class="radio-cell"><input type="radio" name="ca_def_3" value="5"/></td></tr>
+          <tr><td class="q-text">I would share or engage with positive content about this platform on social media or student forums.</td><td class="radio-cell"><input type="radio" name="ca_sha_4" value="1"/></td><td class="radio-cell"><input type="radio" name="ca_sha_4" value="2"/></td><td class="radio-cell"><input type="radio" name="ca_sha_4" value="3"/></td><td class="radio-cell"><input type="radio" name="ca_sha_4" value="4"/></td><td class="radio-cell"><input type="radio" name="ca_sha_4" value="5"/></td></tr>
+          <tr><td class="q-text">I intend to purchase future courses or continue using this platform for my upcoming educational needs.</td><td class="radio-cell"><input type="radio" name="ca_int_5" value="1"/></td><td class="radio-cell"><input type="radio" name="ca_int_5" value="2"/></td><td class="radio-cell"><input type="radio" name="ca_int_5" value="3"/></td><td class="radio-cell"><input type="radio" name="ca_int_5" value="4"/></td><td class="radio-cell"><input type="radio" name="ca_int_5" value="5"/></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="likert-error" id="err-sectionI">Please answer all questions in this section.</div>
+  </div>
+
+  <!-- ── SUBMIT (Yes-branch) ── -->
+  <div class="section-card hidden" id="submitCard">
+    <p style="font-size:0.85rem;color:var(--gf-muted);margin-bottom:16px;">
+      Thank you for completing this survey. Your responses are strictly confidential and used solely for academic research.
+    </p>
+    <div class="btn-row">
+      <button class="btn-submit" id="btn-yes" onclick="submitSurvey()">
+        <span class="spinner" id="spin-yes"></span>Submit Response
+      </button>
+      <button class="btn-clear" onclick="clearForm()">Clear form</button>
+    </div>
+  </div>
+
+  <!-- ── FINAL THANK YOU ── -->
+  <div id="thank-you-final">
+    <div class="ty-icon">✅</div>
+    <h2>Response Submitted Successfully!</h2>
+    <p>
+      Thank you for your valuable participation in this research on<br>
+      <strong>Customer Advocacy in EdTech</strong>.<br><br>
+      Your response has been recorded securely.<br>
+      This study is part of an MBA programme at <strong>IIT Mandi</strong>.
+    </p>
+  </div>
+
+  <div class="form-footer">
+    IIT Mandi · MBA Research Survey · 2025<br>
+    Responses are anonymous and used only for academic purposes.
+  </div>
+
+</div><!-- /formWrapper -->
+
+<script>
+  // ════════════════════════════════════════════════════
+  //  ► PASTE YOUR GAS WEB APP URL BELOW (Step 1)
+  // ════════════════════════════════════════════════════
+  var GAS_URL = "PASTE_YOUR_GAS_WEB_APP_URL_HERE";
+
+  // ─────────────────────────────────────────────────────
+  var YES_SECTIONS = ['sectionB','sectionC','sectionD','sectionE',
+                      'sectionF','sectionG','sectionH','sectionI','submitCard'];
+
+  function el(id)      { return document.getElementById(id); }
+  function radio(name) { var r = document.querySelector('input[name="'+name+'"]:checked'); return r ? r.value : null; }
+  function show(id)    { var e=el(id); if(e) e.classList.add('visible'); }
+  function hide(id)    { var e=el(id); if(e) e.classList.remove('visible'); }
+  function progress(p) { el('progressBar').style.width = p + '%'; }
+
+  // Branching
+  function handleBranch(answer) {
+    hide('err-paid');
+    if (answer === 'Yes') {
+      el('thank-you-no').style.display = 'none';
+      YES_SECTIONS.forEach(function(id){ el(id).classList.remove('hidden'); });
+      progress(50);
+    } else {
+      YES_SECTIONS.forEach(function(id){ el(id).classList.add('hidden'); });
+      el('thank-you-no').style.display = 'block';
+      progress(80);
+      el('thank-you-no').scrollIntoView({ behavior:'smooth' });
+    }
+  }
+
+  // Validation
+  function validate() {
+    var ok = true, first = null;
+    function chk(fail, errId, inputId) {
+      if (fail) {
+        show(errId);
+        if (inputId) el(inputId).classList.add('error');
+        ok = false;
+        if (!first) first = errId;
+      } else {
+        hide(errId);
+        if (inputId) el(inputId).classList.remove('error');
+      }
+    }
+
+    chk(!el('name').value.trim(), 'err-name', 'name');
+    var age = parseInt(el('age').value, 10);
+    chk(isNaN(age)||age<15||age>80, 'err-age', 'age');
+    chk(!radio('gender'),    'err-gender',    null);
+    chk(!radio('education'), 'err-education', null);
+    chk(!radio('platform'),  'err-platform',  null);
+    chk(!radio('duration'),  'err-duration',  null);
+
+    var paid = radio('paid_courses');
+    chk(!paid, 'err-paid', null);
+
+    if (paid === 'Yes') {
+      var groups = {
+        sectionB: ['sq_rel_1','sq_rel_2','sq_rel_3','sq_rel_4'],
+        sectionC: ['ft_exp_1','ft_cred_2','ft_con_3'],
+        sectionD: ['hrc_hon_1','hrc_rev_2'],
+        sectionE: ['pv_fee_1','pv_free_2'],
+        sectionF: ['fsc_con_1','fsc_rec_2'],
+        sectionG: ['ib_int_1','ib_par_2','ib_bel_3'],
+        sectionH: ['os_sat_1','os_met_2','os_dec_3'],
+        sectionI: ['ca_rec_1','ca_pos_2','ca_def_3','ca_sha_4','ca_int_5']
+      };
+      for (var sec in groups) {
+        chk(!groups[sec].every(function(q){ return !!radio(q); }), 'err-'+sec, null);
+      }
+    }
+
+    if (first) el(first).scrollIntoView({ behavior:'smooth', block:'center' });
+    return ok;
+  }
+
+  // Collect all answers into one object
+  function collect() {
+    var paid = radio('paid_courses');
+    var d = {
+      name: el('name').value.trim(), age: el('age').value,
+      gender: radio('gender'), education: radio('education'),
+      platform: radio('platform'), duration: radio('duration'),
+      paid_courses: paid
+    };
+    if (paid === 'Yes') {
+      ['sq_rel_1','sq_rel_2','sq_rel_3','sq_rel_4',
+       'ft_exp_1','ft_cred_2','ft_con_3',
+       'hrc_hon_1','hrc_rev_2',
+       'pv_fee_1','pv_free_2',
+       'fsc_con_1','fsc_rec_2',
+       'ib_int_1','ib_par_2','ib_bel_3',
+       'os_sat_1','os_met_2','os_dec_3',
+       'ca_rec_1','ca_pos_2','ca_def_3','ca_sha_4','ca_int_5'
+      ].forEach(function(f){ d[f] = radio(f); });
+    }
+    return d;
+  }
+
+  // Submit via fetch → GAS
+  function submitSurvey() {
+    if (!validate()) return;
+    var paid  = radio('paid_courses');
+    var btnId = paid === 'Yes' ? 'btn-yes' : 'btn-no';
+    var spnId = paid === 'Yes' ? 'spin-yes' : 'spin-no';
+
+    el(btnId).disabled = true;
+    el(spnId).style.display = 'inline-block';
+    progress(90);
+
+    // no-cors is required for cross-origin GAS calls from GitHub Pages.
+    // The request is received by GAS even though the response is opaque.
+    fetch(GAS_URL, {
+      method:  'POST',
+      mode:    'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(collect())
+    })
+    .then(function() {
+      progress(100);
+      // Replace the entire form with the thank-you card
+      el('formWrapper').innerHTML = '<div id="thank-you-final" style="display:block;background:#fff;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.12);padding:56px 24px;text-align:center;"><div style="font-size:4rem;margin-bottom:16px;">✅</div><h2 style="font-family:Google Sans,sans-serif;font-size:1.5rem;color:#188038;margin-bottom:10px;">Response Submitted Successfully!</h2><p style="color:#5F6368;font-size:.92rem;line-height:1.7;">Thank you for your valuable participation in this research on<br><strong>Customer Advocacy in EdTech</strong>.<br><br>Your response has been recorded securely.<br>This study is part of an MBA programme at <strong>IIT Mandi</strong>.</p></div>';
+    })
+    .catch(function(err) {
+      alert('Submission failed. Check your internet connection and try again.\n\n' + err);
+      el(btnId).disabled = false;
+      el(spnId).style.display = 'none';
+    });
+  }
+
+  // Clear form
+  function clearForm() {
+    if (!confirm('Clear all your answers? This cannot be undone.')) return;
+    document.querySelectorAll('input[type="radio"]').forEach(function(r){ r.checked=false; });
+    el('name').value = ''; el('age').value = '';
+    YES_SECTIONS.forEach(function(id){ el(id).classList.add('hidden'); });
+    el('thank-you-no').style.display = 'none';
+    progress(20);
+    document.querySelectorAll('.field-error,.likert-error').forEach(function(e){ e.classList.remove('visible'); });
+    document.querySelectorAll('.gf-input.error').forEach(function(e){ e.classList.remove('error'); });
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }
+</script>
+</body>
+</html>
